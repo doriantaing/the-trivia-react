@@ -12,3 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.categories{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 20px;
+}
+
+.categories > a{
+  text-decoration: none;
+  color: black;
+}
+
+.categories > a:hover{
+  transition: 0.2s;
+  color: darkblue;
+  transform: scale(1.2);
+}

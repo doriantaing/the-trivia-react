@@ -1,17 +1,26 @@
 import React, {Component} from 'react';
+import api from '../../helpers/api';
 import Category from './Category';
 
 class CategoryContainer extends Component {
-  componentDidMount() {
-    fetch(`http://jservice.io/api/category?id=${this.props.match.params.name}`).then(response => {
-      response.json()
-        .then(category => {
-          console.log(category.clues[0].question);
-        })
-    })
+
+  state = {
+    category: null,
+    title: null,
+    questionNb: 0,
+    score: 0
+  }
+
+  async componentDidMount() {
+    const data = await api.getCategoryById(this.props.match.params.id);
+    this.setState({category: data, title: data.title})
+    console.log(this.state);
   }
   render() {
-    return (<Category categoryName={this.props.match.params.name}/>);
+    return (<Category
+      id={this.props.match.params.id}
+      title={this.state.title}
+      score={this.state.score}/>);
   }
 }
 

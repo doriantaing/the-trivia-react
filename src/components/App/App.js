@@ -11,7 +11,7 @@ class App extends Component {
         <Router>
           <Fragment>
             <Route exact path="/" component={HomeContainer}/>
-            <Route path="/categories/:name" component={CategoryContainer}/>
+            <Route path="/categories/:id" component={CategoryContainer}/>
           </Fragment>
         </Router>
       </div>
