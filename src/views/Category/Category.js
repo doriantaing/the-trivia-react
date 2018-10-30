@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-const Category = ({ title , id, score}) => {
+const Category = ({title, score, question, questionNb}) => {
 
   const verifyAnswer = element => {
     console.log(element);
@@ -10,14 +10,18 @@ const Category = ({ title , id, score}) => {
   return (
     <section>
       <h1>Category page : {title}</h1>
-      <h2>{id}</h2>
 
-      <input type="text"/>
+      {question && (
+        <div>
+          <p>{question[questionNb].question} ?</p>         
+          <input type="text"/>
 
-      <button type="submit" onClick={verifyAnswer}>Enter</button>
+          <button type="submit" onClick={verifyAnswer}>Enter</button>
 
-      <p>score : {score}</p>
-        
+          <p>score : {score}</p>
+
+        </div>
+      )}
     </section>
   )
 }
