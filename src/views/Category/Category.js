@@ -1,28 +1,30 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import styled from 'styled-components';
 
-const Category = ({title, score, question, questionNb}) => {
+const Section = styled.section`
+    color: darkred;
+`
 
-  const verifyAnswer = element => {
-    console.log(element);
-  }
+const Category = ({title, score, question, questionNb , eventChange , eventClick}) => {
 
   return (
-    <section>
+    <Section>
       <h1>Category page : {title}</h1>
 
       {question && (
         <div>
-          <p>{question[questionNb].question} ?</p>         
-          <input type="text"/>
+          <p>{question[questionNb].question}
+            ?</p>
+          <input type="text" onChange={eventChange}/>
 
-          <button type="submit" onClick={verifyAnswer}>Enter</button>
+          <button type="submit" onClick={eventClick}>Enter</button>
 
           <p>score : {score}</p>
 
         </div>
       )}
-    </section>
+    </Section>
   )
 }
 

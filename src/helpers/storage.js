@@ -1,5 +1,13 @@
 class storage {
-    add(key, value){
-        localStorage.setItem(key, value);
+    set(key, value){
+        localStorage.setItem(key, JSON.stringify(value));
+        
+    }
+
+    get(key){
+        const getItem = localStorage.getItem(key);
+        return JSON.parse(getItem);
     }
 }
+
+export default new storage();

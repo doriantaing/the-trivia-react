@@ -1,17 +1,34 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
+import styled from 'styled-components';
+
+
+const Categories = styled.section`
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 20px;
+  color: black;
+`
+
+const LinkCategories = styled.a`
+   color: black;
+   text-decoration: none;
+   &:hover{
+     color: darkred;
+   }
+`
+
 
 const Home = ({categories}) => (
   <section>
     <h1>Homepage</h1>
 
     {categories && (
-      <section className="categories">
+      <Categories>
         {categories.map(category => (
-          <Link to={`/categories/${category.id}`} key={category.id}>{category.title}</Link>
+          <LinkCategories href={`/categories/${category.id}`} key={category.id}>{category.title}</LinkCategories>
         ))}
-      </section>
+      </Categories>
     )}
 
   </section>
