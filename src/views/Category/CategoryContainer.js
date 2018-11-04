@@ -10,8 +10,9 @@ class CategoryContainer extends Component {
       category: null,
       title: null,
       question: null,
-      questionNb: 0,
-      score: 0,
+      questionNb: storage.get('questionNb') || 0,
+      score: storage.get('score') || 0,
+      attempt: storage.get('attempt') || 3,
       inputValue: ''
     }
 
@@ -21,6 +22,8 @@ class CategoryContainer extends Component {
     this.verifyAnswer = this
       .verifyAnswer
       .bind(this);
+      this.storeCorrect = this.storeCorrect.bind(this);
+      this.storeWrong = this.storeWrong.bind(this);
   }
 
   handleChange(event) {
@@ -32,38 +35,61 @@ class CategoryContainer extends Component {
     let answer = questions[this.state.questionNb].answer;
     answer = answer.replace(/[^a-zA-Z0-9 ]/g, "");
 
-    this.state.inputValue === answer
+    this.state.inputValue === answer && this.state.inputValue !== ""
       ? this.correct()
       : this.wrong();
   }
 
   correct() {
-    this.setState(prevState => {
-      prevState.score++;
-      prevState.questionNb++;
-      storage.set('score', this.state.score);
-    })
+    this.setState(prevState => ({
+      score: prevState.score + 1,
+      questionNb: prevState.questionNb + 1
+    }), this.storeCorrect)
   }
 
-  wrong() {}
+  storeCorrect () {
+    storage.set('score', this.state.score);
+    storage.set('questionNb', this.state.questionNb);
+  }
+
+  wrong() {
+    if(this.state.attempt > 0 && this.state.inputValue !== ''){
+      this.setState(prevState => ({
+        attempt: prevState.attempt - 1
+      }), this.storeWrong)
+    }
+  }
+
+
+  storeWrong(){
+    storage.set('attempt', this.state.attempt);
+  }
 
   async componentDidMount() {
     const data = await api.getCategoryById(this.props.match.params.id);
-    this.setState({category: data, title: data.title, question: data.clues})
+    this.setState({
+      category: data,
+      title: data.title,
+      question: data.clues
+    })
 
-    storage.set('category', data.title);
-    storage.set('questions', data.clues);
-    storage.set('score', this.state.score);
+    await storage.set('category', data.title);
+    await storage.set('questions', data.clues);
   }
 
   render() {
-    return (<Category
-      questionNb={this.state.questionNb}
-      title={this.state.title}
-      score={storage.get('score')}
-      question={storage.get('questions')}
-      eventChange={this.handleChange}
-      eventClick={this.verifyAnswer}/>);
+    const { questionNb, title, score , attempt} = this.state
+    return (
+      <Category
+        questionNb={questionNb}
+        title={title}
+        score={score}
+        attempt={attempt}
+        question={storage.get('questions')}
+        eventChange={this.handleChange}
+        eventClick={this.verifyAnswer}
+      />
+    );
   }
 }
 

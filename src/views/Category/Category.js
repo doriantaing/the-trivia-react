@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import styled from 'styled-components';
+import styled , {ThemeProvider} from 'styled-components';
+import { Link } from 'react-router-dom';
+
 
 const Section = styled.section`
     color: darkred;
 `
 
-const Category = ({title, score, question, questionNb , eventChange , eventClick}) => {
+const Category = ({title, score, attempt ,question, questionNb , eventChange , eventClick}) => {
+
 
   return (
     <Section>
       <h1>Category page : {title}</h1>
+      
+      <Link to={`/`}>Back to Categories</Link>
 
       {question && (
         <div>
@@ -22,7 +27,12 @@ const Category = ({title, score, question, questionNb , eventChange , eventClick
 
           <p>score : {score}</p>
 
+          <p>attempt : {attempt} </p>
         </div>
+      )}
+
+      {attempt === 0 && (
+        <h1>Tu es nul , Game Over</h1>
       )}
     </Section>
   )
