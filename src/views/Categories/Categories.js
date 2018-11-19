@@ -5,6 +5,7 @@ const CategoriesTitle = styled.h4 `
   color: #f9aa33;
   font-size: 24px;
   padding: 20px 0 40px;
+  margin: 0;
 `
 
 const CategoriesContent = styled.div `
@@ -25,6 +26,7 @@ const LinkCategories = styled.p `
    font-size: 14px;
    text-decoration: none;
    margin-bottom: 18px;
+   margin-top: 0;
    cursor: pointer;
    &:hover{
      color: #f9aa33;

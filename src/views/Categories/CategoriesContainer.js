@@ -36,6 +36,8 @@ class CategoriesContainer extends React.Component {
     element = element.target;
     const getQuestions = await api.getCategoryById(element.classList[0]);
     this.setState({questions: getQuestions, click: true})
+    
+    element.classList.add('active');
   }
 
   render() {
