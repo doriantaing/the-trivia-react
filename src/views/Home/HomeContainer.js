@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Home from './Home';
 import api from '../../helpers/api';
+import styled from 'styled-components';
 
 class HomeContainer extends Component {
   constructor() {
@@ -9,16 +10,23 @@ class HomeContainer extends Component {
     this.state = {
       categories: null
     }
+
+    this.changeUrl = this
+      .changeUrl
+      .bind(this);
   }
 
   async componentDidMount() {
     const fetch = await api.getCategories();
     this.setState({categories: fetch})
   }
+
+  changeUrl = location => {}
+
   render() {
-    return (<Home
-      categories={this.state.categories}
-      />);
+    return (
+        <Home categories={this.state.categories} events={this.changeUrl}/>
+    );
   }
 }
 

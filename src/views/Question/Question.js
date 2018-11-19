@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import styled , {ThemeProvider} from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 
@@ -8,8 +8,7 @@ const Section = styled.section`
     color: darkred;
 `
 
-const Category = ({title, score, attempt ,question, questionNb , eventChange , eventClick}) => {
-
+const Question = ({title, score, attempt ,question, questionNb , eventChange , eventClick}) => {
 
   return (
     <Section>
@@ -38,8 +37,8 @@ const Category = ({title, score, attempt ,question, questionNb , eventChange , e
   )
 }
 
-Category.propTypes = {
+Question.propTypes = {
   category: PropTypes.string
 };
 
-export default Category;
+export default Question;

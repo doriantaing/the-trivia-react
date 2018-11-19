@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import './App.scss';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import HomeContainer from '../../views/Home/HomeContainer';
-import CategoryContainer from '../../views/Category/CategoryContainer';
+import CategoriesContainer from '../../views/Categories/CategoriesContainer';
+
 
 class App extends Component {  
   render() {
@@ -10,8 +10,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <Fragment>
-            <Route exact path="/" component={HomeContainer}/>
-            <Route path="/categories/:id" component={CategoryContainer}/>
+            <Route exact path="/" component={CategoriesContainer}/>
           </Fragment>
         </Router>
       </div>

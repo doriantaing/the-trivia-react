@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import api from '../../helpers/api';
-import Category from './Category';
 import storage from '../../helpers/storage';
+import Question from '../Question/Question';
 
-class CategoryContainer extends Component {
+
+class QuestionContainer extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,12 +20,13 @@ class CategoryContainer extends Component {
     this.handleChange = this
       .handleChange
       .bind(this);
-    this.verifyAnswer = this
-      .verifyAnswer
-      .bind(this);
-      this.storeCorrect = this.storeCorrect.bind(this);
-      this.storeWrong = this.storeWrong.bind(this);
-  }
+      this.verifyAnswer = this
+        .verifyAnswer
+        .bind(this);
+        this.storeCorrect = this.storeCorrect.bind(this);
+        this.storeWrong = this.storeWrong.bind(this);
+        this.checkUrl = this.checkUrl.bind(this);
+    }
 
   handleChange(event) {
     this.setState({inputValue: event.target.value})
@@ -60,27 +62,32 @@ class CategoryContainer extends Component {
     }
   }
 
+  checkUrl() {
+    console.log(this.props);
+  }
 
   storeWrong(){
     storage.set('attempt', this.state.attempt);
   }
 
-  async componentDidMount() {
-    const data = await api.getCategoryById(this.props.match.params.id);
-    this.setState({
-      category: data,
-      title: data.title,
-      question: data.clues
-    })
+  // async componentDidMount() {
+  //   const data = await api.getCategoryById(this.props.match.params.id);
+  //   this.setState({
+  //     category: data,
+  //     title: data.title,
+  //     question: data.clues
+  //   })
 
-    await storage.set('category', data.title);
-    await storage.set('questions', data.clues);
-  }
+  //   await storage.set('category', data.title);
+  //   await storage.set('questions', data.clues);
+
+  //   this.checkUrl();
+  // }
 
   render() {
     const { questionNb, title, score , attempt} = this.state
     return (
-      <Category
+      <Question
         questionNb={questionNb}
         title={title}
         score={score}
@@ -93,4 +100,4 @@ class CategoryContainer extends Component {
   }
 }
 
-export default CategoryContainer;
+export default QuestionContainer;
