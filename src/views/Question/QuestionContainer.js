@@ -3,13 +3,10 @@ import api from '../../helpers/api';
 import storage from '../../helpers/storage';
 import Question from '../Question/Question';
 
-
 class QuestionContainer extends Component {
   constructor() {
     super();
     this.state = {
-      category: null,
-      title: null,
       question: null,
       questionNb: storage.get('questionNb') || 0,
       score: storage.get('score') || 0,
@@ -17,86 +14,45 @@ class QuestionContainer extends Component {
       inputValue: ''
     }
 
-    this.handleChange = this
-      .handleChange
-      .bind(this);
-      this.verifyAnswer = this
-        .verifyAnswer
-        .bind(this);
-        this.storeCorrect = this.storeCorrect.bind(this);
-        this.storeWrong = this.storeWrong.bind(this);
-        this.checkUrl = this.checkUrl.bind(this);
-    }
-
-  handleChange(event) {
-    this.setState({inputValue: event.target.value})
+    // this.handleChange = this   .handleChange   .bind(this);   this.verifyAnswer =
+    // this     .verifyAnswer     .bind(this);     this.storeCorrect =
+    // this.storeCorrect.bind(this);     this.storeWrong =
+    // this.storeWrong.bind(this);
   }
 
-  verifyAnswer(value) {
-    const questions = storage.get('questions');
-    let answer = questions[this.state.questionNb].answer;
-    answer = answer.replace(/[^a-zA-Z0-9 ]/g, "");
+  // handleChange(event) {   this.setState({inputValue: event.target.value}) }
+  // verifyAnswer(value) {   const questions = storage.get('questions');   let
+  // answer = questions[this.state.questionNb].answer;   answer =
+  // answer.replace(/[^a-zA-Z0-9 ]/g, "");   this.state.inputValue === answer &&
+  // this.state.inputValue !== ""     ? this.correct()     : this.wrong(); }
+  // correct() {   this.setState(prevState => ({     score: prevState.score + 1,
+  //   questionNb: prevState.questionNb + 1   }), this.storeCorrect) }
+  // storeCorrect () {   storage.set('score', this.state.score);
+  // storage.set('questionNb', this.state.questionNb); } wrong() {
+  // if(this.state.attempt > 0 && this.state.inputValue !== ''){
+  // this.setState(prevState => ({       attempt: prevState.attempt - 1     }),
+  // this.storeWrong)   } } storeWrong(){   storage.set('attempt',
+  // this.state.attempt); }
 
-    this.state.inputValue === answer && this.state.inputValue !== ""
-      ? this.correct()
-      : this.wrong();
+  async componentDidMount() {
+
+    console.log(this.state);
   }
-
-  correct() {
-    this.setState(prevState => ({
-      score: prevState.score + 1,
-      questionNb: prevState.questionNb + 1
-    }), this.storeCorrect)
-  }
-
-  storeCorrect () {
-    storage.set('score', this.state.score);
-    storage.set('questionNb', this.state.questionNb);
-  }
-
-  wrong() {
-    if(this.state.attempt > 0 && this.state.inputValue !== ''){
-      this.setState(prevState => ({
-        attempt: prevState.attempt - 1
-      }), this.storeWrong)
-    }
-  }
-
-  checkUrl() {
-    console.log(this.props);
-  }
-
-  storeWrong(){
-    storage.set('attempt', this.state.attempt);
-  }
-
-  // async componentDidMount() {
-  //   const data = await api.getCategoryById(this.props.match.params.id);
-  //   this.setState({
-  //     category: data,
-  //     title: data.title,
-  //     question: data.clues
-  //   })
-
-  //   await storage.set('category', data.title);
-  //   await storage.set('questions', data.clues);
-
-  //   this.checkUrl();
-  // }
 
   render() {
-    const { questionNb, title, score , attempt} = this.state
+    const {title , clues} = this.props.questions
+    const {questionNb} = this.state
+
     return (
       <Question
-        questionNb={questionNb}
-        title={title}
-        score={score}
-        attempt={attempt}
-        question={storage.get('questions')}
-        eventChange={this.handleChange}
-        eventClick={this.verifyAnswer}
-      />
-    );
+      questionNb={questionNb}
+      title={title}
+      // score={score}
+      // attempt={attempt}
+      question={clues}
+      // eventChange={this.handleChange}
+      // eventClick={this.verifyAnswer}
+      />);
   }
 }
 

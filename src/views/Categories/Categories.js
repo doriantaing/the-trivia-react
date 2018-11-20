@@ -28,11 +28,13 @@ const LinkCategories = styled.p `
    margin-bottom: 18px;
    margin-top: 0;
    cursor: pointer;
+  transition: 0.5s;
    &:hover{
      color: #f9aa33;
    }
    &.active{
      color: #f9aa33;
+     font-size: 17px;
    }
 `
 
