@@ -10,10 +10,6 @@ class HomeContainer extends Component {
     this.state = {
       categories: null
     }
-
-    this.changeUrl = this
-      .changeUrl
-      .bind(this);
   }
 
   async componentDidMount() {
@@ -21,11 +17,9 @@ class HomeContainer extends Component {
     this.setState({categories: fetch})
   }
 
-  changeUrl = location => {}
-
   render() {
     return (
-        <Home categories={this.state.categories} events={this.changeUrl}/>
+        <Home categories={this.state.categories}/>
     );
   }
 }

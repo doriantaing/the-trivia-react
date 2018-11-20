@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import api from '../../helpers/api';
 import storage from '../../helpers/storage';
 import Question from '../Question/Question';
 
@@ -26,16 +25,18 @@ class QuestionContainer extends Component {
     this.storeWrong = this
       .storeWrong
       .bind(this);
+    this.focusInput = this.focusInput.bind(this);
   }
 
   handleChange(event) {
     this.setState({inputValue: event.target.value})
   }
-  verifyAnswer(value) {
+  verifyAnswer() {
     const questions = storage.get('category');
     let answer = questions.clues[this.state.questionNb].answer;
+
     answer = answer.replace(/[^a-zA-Z0-9 ]/g, "");
-    
+
     this.state.inputValue === answer && this.state.inputValue !== ""
       ? this.correct()
       : this.wrong();
@@ -43,12 +44,9 @@ class QuestionContainer extends Component {
   correct() {
     this.setState(prevState => ({
       score: prevState.score + 1,
-      questionNb: prevState.questionNb + 1
+      questionNb: prevState.questionNb + 1,
+      inputValue: ''
     }), this.storeCorrect)
-  }
-  storeCorrect() {
-    storage.set('score', this.state.score);
-    storage.set('questionNb', this.state.questionNb);
   }
   wrong() {
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
@@ -57,11 +55,20 @@ class QuestionContainer extends Component {
       }), this.storeWrong)
     }
   }
+  storeCorrect() {
+    storage.set('score', this.state.score);
+    storage.set('questionNb', this.state.questionNb);
+  }
   storeWrong() {
     storage.set('attempt', this.state.attempt);
   }
 
-  async componentDidMount() {
+  focusInput(element) {
+    if(this.state.inputValue !== ''){
+      element.target.classList.add('focus');
+    } else {
+      element.target.classList.remove('focus');
+    }
   }
 
   render() {
@@ -76,7 +83,7 @@ class QuestionContainer extends Component {
     question={clues} 
     eventChange={this.handleChange}
     eventClick={this.verifyAnswer}
-
+    eventFocus={this.focusInput}
     />);
   }
 }

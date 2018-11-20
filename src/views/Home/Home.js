@@ -24,7 +24,7 @@ const HomeTitle = styled.h1`
 const Home = ({categories}) => (
   <div>
     <HomeContent>
-      <HomeTitle>Selectionner vôtre categorie</HomeTitle>
+      <HomeTitle>Select a Category</HomeTitle>
     </HomeContent>
 
     {/* Loader Home  */}

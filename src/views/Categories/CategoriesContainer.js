@@ -18,7 +18,7 @@ class CategoriesContainer extends React.Component {
 
     this.state = {
       categories: null,
-      click: false,
+      click: storage.get('click') || false,
       questions: null,
       categoryClicked: '',
       lastClicked: '',
@@ -45,6 +45,9 @@ class CategoriesContainer extends React.Component {
     })
     
     await storage.set('category', getQuestions);
+    // await storage.set('click', this.state.click);
+
+    // Make sure that only one category can be selected
     if(this.state.categoryClicked !== element){
       this.setState({
         lastClicked: this.state.categoryClicked || '',

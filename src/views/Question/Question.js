@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import styled , {createGlobalStyle} from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
+import IconHeart from './IconHeart';
 
-const GlobalStyle = createGlobalStyle`
+
+const GlobalStyle = createGlobalStyle `
   p{
     margin: 0;
   }
 `
 
-const SectionContainer = styled.section`
+const SectionContainer = styled.section `
   background: #fff;
   width: auto;
   height: auto;
@@ -23,17 +25,17 @@ const SectionContainer = styled.section`
   padding: 35px 0 0;
 `
 
-const Section = styled.div`
+const Section = styled.div `
   position: relative;
 `
 
-const QuestionText = styled.p`
+const QuestionText = styled.p `
   color: #575757;
   font-size: 18px;
   margin: 22px 0;
 `
 
-const QuestionContent = styled.div`
+const QuestionContent = styled.div `
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -42,13 +44,13 @@ const QuestionContent = styled.div`
   padding: 0 40px;
 `
 
-const QuestionButton = styled.button`
-  position: absolute;
+const QuestionButton = styled.button `
+  position: ${props => props.restart ? 'static' : 'absolute'};
   bottom: -45px;
   right: 0;
   border-radius: 4px;
-  background: #344955;
-  opacity: 0.1;
+  background: ${props => props.restart ? '#f9aa33' : '#344955'};
+  opacity: ${props => props.restart ? '1' : '0.1'};
   color: #FFF;
   font-size: 13px;
   width: 85px;
@@ -57,7 +59,7 @@ const QuestionButton = styled.button`
   cursor: pointer;
   transition: .2s;
 `
-const QuestionInput = styled.input`
+const QuestionInput = styled.input `
   border: 1px solid #979797;
   width: 100%;
   border-radius: 4px;
@@ -66,10 +68,12 @@ const QuestionInput = styled.input`
   padding-left: 8px;
   transition: .2s ease-out;
   margin-bottom: 21px;
-  &.focus{
+  &:focus{
     &::placeholder{
       opacity: 0;
     }
+  }
+  &.focus{
     box-shadow: 0 0 7px 1px #f9aa33;
     border-color: #f9aa33;
     &~button{
@@ -78,36 +82,60 @@ const QuestionInput = styled.input`
   }
 `
 
-const TopRight = styled.div`
+const TopRight = styled.div `
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
 `
-const Question = ({score, attempt , question , questionNb, eventChange , eventClick}) => {
+const Question = ({
+  score,
+  attempt,
+  question,
+  questionNb,
+  eventChange,
+  eventClick,
+  eventFocus
+}) => {
   return (
     <Section>
-    <SectionContainer>
-    <GlobalStyle/>
+      <SectionContainer>
       
-      {question && (
-        <QuestionContent>
-          <h1>Question {questionNb + 1}</h1>
-          <QuestionText>{question[questionNb].question}?</QuestionText>
-          <QuestionInput type="text" onChange={eventChange} placeholder="Réponse..."/>
+        <GlobalStyle/> 
+        {question  && attempt > 0 && (
+          <QuestionContent>
+            <h1>Question {questionNb + 1}</h1>
+            <QuestionText>{question[questionNb].question}</QuestionText>
+            <QuestionInput type="text" 
+            onChange={eventChange} 
+            onKeyDown={eventFocus}
+            onKeyUp={eventFocus} 
+            placeholder="Answer..."/>
 
-          <TopRight>
-          <p>attempt : {attempt} </p>
-          <p>{score} points</p>
-          </TopRight>
+            <TopRight>
+              <div>
+                 <IconHeart attempt={attempt}/>
+              </div>
+              <p>{score} points</p>
+            </TopRight>
 
-          <QuestionButton type="submit" onClick={eventClick}>Valider</QuestionButton>
-        </QuestionContent>
-      )}
+            <QuestionButton type="submit" onClick={eventClick}>Enter</QuestionButton>
+          </QuestionContent>
+        )}
 
-      {attempt === 0 && (
-        <h1>Tu es nul , Game Over</h1>
-      )}
-    </SectionContainer>
+        {attempt === 0 && (
+          <QuestionContent>
+            <h1>Game Over</h1>
+
+            <QuestionText>You won {score} points</QuestionText>
+
+            <QuestionButton restart>Try Again</QuestionButton>
+
+            <TopRight>
+              <IconHeart attempt={attempt}/>
+            </TopRight>
+          </QuestionContent>
+        )}
+      </SectionContainer>
     </Section>
   )
 }
