@@ -45,17 +45,17 @@ class CategoriesContainer extends React.Component {
     })
     
     await storage.set('category', getQuestions);
-
-    // counter++;
-    this.setState({
-      lastClicked: this.state.categoryClicked || '',
-      categoryClicked: element,
-    })
-    
-    this.state.categoryClicked.classList.add('active');
-
-    if(this.state.lastClicked){
-      this.state.lastClicked.classList.remove('active');
+    if(this.state.categoryClicked !== element){
+      this.setState({
+        lastClicked: this.state.categoryClicked || '',
+        categoryClicked: element,
+      })
+      
+      this.state.categoryClicked.classList.add('active');
+  
+      if(this.state.lastClicked){
+        this.state.lastClicked.classList.remove('active');
+      }
     }
   }
 
