@@ -1,15 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const IconContainer = styled.div`
-   display: flex;
-`
-const Icon = styled.svg`
-   fill: ${ props => props.lost ? '#f4f5f9' : '#f9aa33'};
-   width: 16px;
-   height: 16px;
-   margin-right: 8px;
-`
+import {IconContainer, Icon} from './style/QuestionStyle';
 
 
 const IconHeart = ({attempt}) => {

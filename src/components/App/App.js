@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CategoriesContainer from '../../views/Categories/CategoriesContainer';
 
 
+
 class App extends Component {  
   render() {
     return (

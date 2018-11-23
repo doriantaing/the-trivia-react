@@ -11,18 +11,6 @@ body{
 
 $primary-color: #000;
 
-@import 'loaders.css/src/animations/pacman.scss';
-
-.loader-hidden {
-  display: none;
-}
-.loader-active {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .App {
     text-align: center;

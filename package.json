@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "icomoon-react": "^0.1.7",
-    "loaders.css": "^0.1.2",
+    "circular-json": "^0.5.9",
     "node-sass": "^4.9.4",
     "react": "^16.6.0",
+    "react-cookie": "^3.0.4",
     "react-dom": "^16.6.0",
-    "react-icomoon": "^1.0.0",
-    "react-loaders": "^3.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "styled-components": "^4.0.3"
