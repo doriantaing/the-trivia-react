@@ -108,7 +108,8 @@ class CategoriesContainer extends React.Component {
     let answer = questions.clues[this.state.questionNb].answer;
 
     answer = answer.replace(/[^a-zA-Z0-9 ]/g, "");
-
+    
+    if(this.state.questionNb <= this.state.questions.clues.length - 1)
     this.state.inputValue === answer && this.state.inputValue !== "" ? this.correct() : this.wrong();
     this.setState({isFocus: false});
   }
@@ -119,7 +120,7 @@ class CategoriesContainer extends React.Component {
       score: prevState.score + 1,
       questionNb: prevState.questionNb + 1,
       inputValue: ''
-    }), this.storeCorrect)
+    }), this.storeLocal)
   }
 
   // If wrong update state and add anim
@@ -127,9 +128,10 @@ class CategoriesContainer extends React.Component {
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
       this.setState(prevState => ({
         attempt: prevState.attempt - 1,
+        questionNb: prevState.questionNb + 1,
         inputValue: '',
         isWrong: true
-      }), this.storeWrong)
+      }), this.storeLocal)
         
       if(this.state.attempt >= 1){
         this.animWrong.current.classList.add('shake');
@@ -141,27 +143,25 @@ class CategoriesContainer extends React.Component {
     }
   }
 
-  // Store data in local storage if correct
-  storeCorrect = () => {
+  // Store data in local storage 
+  storeLocal = () => {
     storage.set('score', this.state.score);
     storage.set('questionNb', this.state.questionNb);
-  }
-
-  // Store data in local storage if wrong
-  storeWrong = () => {
     storage.set('attempt', this.state.attempt);
   }
+
    
   // Restart state from beginning and store it in localStorage
   restartGame = () => {
     this.setState({
-      attempt: 3,
       score: 0,
-      questionNb: 0,
-    })
-
-    this.storeCorrect();
-    this.storeWrong();
+      attempt: 3,
+      questionNb: 0,  
+    });
+    
+    this.storeWrong();  
+    storage.set('questionNb', 0);
+    storage.set('score', 0);
   }
   
   // Show and Hide menu in Mobile

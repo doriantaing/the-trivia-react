@@ -12,7 +12,7 @@ import {
 const Categories = ({categories, eventClick, isMobile, clickMobile , categoryClicked}) => (
   <CategoriesContent>
 
-    <CategoriesTitle>Trivia Game</CategoriesTitle>
+    <CategoriesTitle>寿司ゲーム</CategoriesTitle>
     {isMobile && (
       <MobileMenu onClick={clickMobile}>
         <MobileMenuContainer>

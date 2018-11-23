@@ -41,16 +41,14 @@ export const CategoriesContainer = styled.section `
 
 export const LinkCategories = styled.p `
    color: #FFF;
-   font-size: 14px;
+   font-size: 12px;
    text-decoration: none;
    margin-bottom: 18px;
    margin-top: 0;
    cursor: pointer;
   transition: 0.5s;
   text-transform: uppercase;
-   &:hover{
-     color: #f9aa33;
-   }
+  color: #f9aa33;
    &.active{
      color: #f9aa33;
      font-size: 17px;
@@ -94,7 +92,7 @@ export const MenuLine = styled.div`
 
 
 export const CategoriesContent = styled.div `
-  background: #344955;
+  background: #f4f5f9;
   height: 100vh;
   color: #fff;
   width: 260px;

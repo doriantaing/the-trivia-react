@@ -1,4 +1,6 @@
 import styled, {createGlobalStyle} from 'styled-components';
+import patern from '../../patern.svg';
+
 
 export const GlobalStyle = createGlobalStyle `
   p{
@@ -10,6 +12,7 @@ export const Section = styled.div `
   display: flex;
   justify-content: center; 
   align-items: center; 
+  background: url(${patern}) no-repeat center center;
 `
 
 export const SectionContainer = styled.section `
