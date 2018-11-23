@@ -6,14 +6,17 @@ export const GlobalStyle = createGlobalStyle `
   }
 `
 
+export const Section = styled.div `
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+`
+
 export const SectionContainer = styled.section `
+  position: relative;
   background: #fff;
   width: auto;
   height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   min-width: 436px;
@@ -25,22 +28,19 @@ export const SectionContainer = styled.section `
   }
   @keyframes shake{
     0%{
-      transform: translate(-50%, -50%) rotate(-10deg);
+      transform: rotate(-10deg);
     }
     50%{
-      transform: translate(-50%, -50%) rotate(10deg);
+      transform: rotate(10deg);
     }
   }
-`
-
-export const Section = styled.div `
-  position: relative;
 `
 
 export const QuestionText = styled.p `
   color: #575757;
   font-size: 18px;
   margin: 22px 0;
+  max-width: 400px;
 `
 
 export const QuestionContent = styled.div `

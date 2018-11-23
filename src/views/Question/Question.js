@@ -14,10 +14,12 @@ const Question = ({
   restartGame,
   inputValue,
   isFocus,
+  keyEnter,
+  animWrong
 }) => {
   return (
     <Section>
-      <SectionContainer>
+      <SectionContainer ref={animWrong}>
       
         <GlobalStyle/> 
 
@@ -27,8 +29,8 @@ const Question = ({
             <QuestionText>{question[questionNb].question}</QuestionText>
             <QuestionInput type="text" 
             onChange={eventChange}
-            onKeyDown={eventChange}
             onKeyUp={eventChange}
+            onKeyDown={keyEnter}
             placeholder="Answer..."
             value={inputValue}
             className={isFocus ? "focus" : ""}

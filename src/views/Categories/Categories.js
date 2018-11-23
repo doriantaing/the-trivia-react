@@ -1,22 +1,35 @@
 import React from 'react';
-import {CategoriesContent , CategoriesTitle , CategoriesContainer , LinkCategories} from './style/CategoriesStyle';
+import {
+  CategoriesContent,
+  CategoriesTitle,
+  CategoriesContainer,
+  LinkCategories,
+  MobileMenu,
+  MobileMenuContainer,
+  MenuLine
+} from './style/CategoriesStyle';
 
-const Categories = ({categories, eventClick , isMobile}) => (
-    <CategoriesContent>
+const Categories = ({categories, eventClick, isMobile, clickMobile , categoryClicked}) => (
+  <CategoriesContent>
 
-    {isMobile &&  (
-       <h4>Hello</h4>
+    <CategoriesTitle>Trivia Game</CategoriesTitle>
+    {isMobile && (
+      <MobileMenu onClick={clickMobile}>
+        <MobileMenuContainer>
+          <MenuLine/>
+          <MenuLine/>
+          <MenuLine/>
+        </MobileMenuContainer>
+      </MobileMenu>
     )}
-      <CategoriesTitle>Trivia Game</CategoriesTitle>
-
-      {categories && (
-        <CategoriesContainer>
-          {categories.map(category => (
-            <LinkCategories className={category.id} key={category.id} onClick={eventClick}>{category.title}</LinkCategories>
-          ))}
-        </CategoriesContainer>
-      )}
-    </CategoriesContent>
+    {categories && (
+      <CategoriesContainer>
+        {categories.map(category => (
+          <LinkCategories className={category.id} key={category.id} onClick={eventClick}>{category.title}</LinkCategories>
+        ))}
+      </CategoriesContainer>
+    )}
+  </CategoriesContent>
 )
 
 export default Categories;

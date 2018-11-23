@@ -4,7 +4,9 @@ export const Container = styled.section `
   display: grid;
   grid-template-columns: 260px 1fr;
   @media (max-width: 767px){
-    grid-template-columns: 1fr;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
   }
 `
 
@@ -20,25 +22,20 @@ export const CategoriesTitle = styled.h4 `
   }
 `
 
-export const CategoriesContent = styled.div `
-  background: #344955;
-  height: 100vh;
-  color: #fff;
-  width: 260px;
-  @media (max-width: 767px){
-    height: auto;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-`
 export const CategoriesContainer = styled.section `
   display: flex;
   flex-direction: column;
   text-align: left;
   padding-left: 20px;
+  transition: 0.5s;
   @media (max-width: 767px){
-    display: none;
+    position: fixed;
+    bottom: -2000px;
+    background: #344955;
+    padding: 67px 0 0;
+    height: calc(100% - 123px);
+    width: 100%;
+    text-align: center;
   }
 `
 
@@ -50,6 +47,7 @@ export const LinkCategories = styled.p `
    margin-top: 0;
    cursor: pointer;
   transition: 0.5s;
+  text-transform: uppercase;
    &:hover{
      color: #f9aa33;
    }
@@ -57,4 +55,70 @@ export const LinkCategories = styled.p `
      color: #f9aa33;
      font-size: 17px;
    }
+`
+
+export const MobileMenu = styled.div`
+   border: 3px solid #fff;
+   background: #344955;
+   width: 35px;
+   height: 35px;
+   position: absolute;
+   top: -21px;
+   left: 50%;
+   transform: translateX(-50%) rotate(45deg); 
+   cursor: pointer;
+   z-index: 1;
+   transition: 0.5s;
+`
+
+export const MobileMenuContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   transform: rotate(-45deg);
+   pointer-events: none;
+`
+
+export const MenuLine = styled.div`
+  background: #f9aa33;
+  width: 18px;
+  height: 2px;
+  margin-top: 5px;
+  pointer-events: none;
+  &:first-child{
+    margin-top: 0;
+  }
+`
+
+
+export const CategoriesContent = styled.div `
+  background: #344955;
+  height: 100vh;
+  color: #fff;
+  width: 260px;
+  transition: 0.5s;
+  @media (max-height: 616px){
+    height: 100%;
+  }
+  @media (max-width: 767px){
+    height: auto;
+    width: 100%;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &.open{
+    background : #f4f5f9;
+    ${MobileMenu} {
+      background: #f4f5f9;
+      border-color: #344955;
+    }
+    ${CategoriesContainer} {
+      bottom: 56px;
+    }      
+  }
 `
