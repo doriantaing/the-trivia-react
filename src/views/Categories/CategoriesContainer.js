@@ -128,7 +128,6 @@ class CategoriesContainer extends React.Component {
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
       this.setState(prevState => ({
         attempt: prevState.attempt - 1,
-        questionNb: prevState.questionNb + 1,
         inputValue: '',
         isWrong: true
       }), this.storeLocal)
@@ -159,7 +158,7 @@ class CategoriesContainer extends React.Component {
       questionNb: 0,  
     });
     
-    this.storeWrong();  
+    this.storeLocal();  
     storage.set('questionNb', 0);
     storage.set('score', 0);
   }
