@@ -13,6 +13,7 @@ export const Section = styled.div `
   justify-content: center; 
   align-items: center; 
   background: url(${patern}) no-repeat center center;
+  background-size: cover;
 `
 
 export const SectionContainer = styled.section `
@@ -107,9 +108,9 @@ export const IconContainer = styled.div`
    display: flex;
 `
 
-export const Icon = styled.svg`
+export const Icon = styled.img`
    fill: ${ props => props.lost ? '#f4f5f9' : '#f9aa33'};
-   width: 16px;
-   height: 16px;
+   width: 26px;
+   height: 26px;
    margin-right: 8px;
 `

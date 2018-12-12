@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.section `
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 280px 1fr;
   @media (max-width: 767px){
     display: flex;
     justify-content: center;
     height: 100vh;
+    overflow: hidden;
   }
 `
 
@@ -40,18 +41,19 @@ export const CategoriesContainer = styled.section `
 `
 
 export const LinkCategories = styled.p `
-   color: #FFF;
-   font-size: 12px;
-   text-decoration: none;
-   margin-bottom: 18px;
-   margin-top: 0;
-   cursor: pointer;
+  color: #FFF;
+  font-size: 12px;
+  text-decoration: none;
+  margin-bottom: 18px;
+  margin-top: 0;
+  cursor: pointer;
   transition: 0.5s;
   text-transform: uppercase;
   color: #f9aa33;
+  position: relative;
    &.active{
-     color: #f9aa33;
-     font-size: 17px;
+     transform: scale(1.1);
+     transform-origin: left;
    }
 `
 
@@ -119,4 +121,22 @@ export const CategoriesContent = styled.div `
       bottom: 56px;
     }      
   }
+`
+
+export const LoaderContainer = styled.div `
+  background: #f9aa33;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`
+
+export const LoaderText = styled.h3`
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 30px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `

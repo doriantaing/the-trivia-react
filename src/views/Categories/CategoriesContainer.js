@@ -4,7 +4,9 @@ import api from '../../helpers/api';
 import storage from '../../helpers/storage';
 import Home from '../Home/Home';  
 import Question from '../Question/Question';
-import {Container} from './style/CategoriesStyle';
+import {Container, LoaderContainer , LoaderText} from './style/CategoriesStyle';
+import Loaderannimation from '@haiku/vicorch-loaderannimation/react';
+import firebase from './../../helpers/firebase';
 
 
 
@@ -25,9 +27,11 @@ class CategoriesContainer extends React.Component {
       isFocus: false,
       isMobile: false,
       isWrong: false,
+      isLoading: false, 
       menuOpen: false,
       windowWidth: window.innerWidth,
-      isClicked: storage.get('click') || false
+      isClicked: storage.get('click') || false,
+      items: []
     }
     
     this.animWrong = React.createRef();
@@ -35,11 +39,18 @@ class CategoriesContainer extends React.Component {
   }
 
   async componentDidMount() {
+    this.setState({isLoading: true})
     const data = await api.getCategories();
-    this.setState({categories: data })
-    
+    this.setState({categories: data , isLoading: false});
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
+
+    let itemsRef = firebase.database().ref('categories');
+
+    itemsRef.on('value', snapshot => {
+      console.log('hello');
+      console.log(snapshot.val());
+    });
   }
 
   displayMobile = () => {
@@ -78,7 +89,6 @@ class CategoriesContainer extends React.Component {
       })
 
       this.state.categoryClicked.classList.add('active');
-    
       if(this.state.lastClicked){
         this.state.lastClicked.classList.remove('active');
         this.setState({
@@ -116,11 +126,13 @@ class CategoriesContainer extends React.Component {
 
   // If correct update state
   correct = () => {
-    this.setState(prevState => ({
-      score: prevState.score + 1,
-      questionNb: prevState.questionNb + 1,
-      inputValue: ''
-    }), this.storeLocal)
+    if(this.state.questionNb <= 10){
+      this.setState(prevState => ({
+        score: prevState.score + 1,
+        questionNb: prevState.questionNb + 1,
+        inputValue: ''
+      }), this.storeLocal)
+    }
   }
 
   // If wrong update state and add anim
@@ -205,20 +217,29 @@ class CategoriesContainer extends React.Component {
       animWrong={this.animWrong}
       />
     }
-    
-    
-    return (
-      <Container>
-        <Categories 
-        isClicked={this.state.click} 
-        categories={this.state.categories} 
-        eventClick={this.eventClick} 
-        isMobile={this.state.isMobile}
-        clickMobile={this.clickMenu}
-        />
-        {page}
-      </Container>
-    )
+
+    if(this.state.isLoading){
+      return(
+        <LoaderContainer>
+        <Loaderannimation className='loader' loop={true} />
+        <LoaderText>Loading ...</LoaderText>
+        </LoaderContainer>
+        
+      )
+    } else {
+      return (
+        <Container>
+          <Categories 
+          isClicked={this.state.click} 
+          categories={this.state.categories} 
+          eventClick={this.eventClick} 
+          isMobile={this.state.isMobile}
+          clickMobile={this.clickMenu}
+          />
+          {page}
+        </Container>
+      )
+    }
   }
 }
 

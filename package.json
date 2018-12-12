@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@haiku/vicorch-loaderannimation": "0.0.3",
     "circular-json": "^0.5.9",
+    "firebase": "^5.7.0",
     "node-sass": "^4.9.4",
     "react": "^16.6.0",
     "react-cookie": "^3.0.4",

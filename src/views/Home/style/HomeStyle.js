@@ -1,18 +1,19 @@
 import styled from 'styled-components';
-import patern from '../../patern.svg';
+import patern from './../../patern.svg';
 
 
 export const HomeContent = styled.div`
-  background: url(${patern}) no-repeat center center;
-  background-size: cover;
   position: relative;
   height: 100%;
   width: 100%;  
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url(${patern}) no-repeat center center;
+  background-size: cover;
   @media (max-width: 767px){
     height: 100vh;
+    width: 100vw;
   }
 `
 
