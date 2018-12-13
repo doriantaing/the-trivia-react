@@ -7,7 +7,7 @@ import {Section, SectionContainer , GlobalStyle , QuestionContent , QuestionText
 const Question = ({
   score,
   attempt,
-  question,
+  cat_questions,
   questionNb,
   eventChange,
   eventClick,
@@ -23,10 +23,10 @@ const Question = ({
       
         <GlobalStyle/> 
 
-        {question && attempt > 0 && (
+        {cat_questions && attempt > 0 && (
           <QuestionContent>
             <h1>Question {questionNb + 1}</h1>
-            <QuestionText>{question[questionNb].question}</QuestionText>
+            <QuestionText>{ cat_questions.questions[questionNb].question}</QuestionText>
             <QuestionInput type="text" 
             onChange={eventChange}
             onKeyUp={eventChange}

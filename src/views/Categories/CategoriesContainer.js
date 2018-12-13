@@ -6,7 +6,6 @@ import Home from '../Home/Home';
 import Question from '../Question/Question';
 import {Container, LoaderContainer , LoaderText} from './style/CategoriesStyle';
 import Loaderannimation from '@haiku/vicorch-loaderannimation/react';
-import firebase from './../../helpers/firebase';
 
 
 
@@ -18,7 +17,7 @@ class CategoriesContainer extends React.Component {
     this.state = {
       categories: null,
       click: storage.get('click') || false,
-      questions: storage.get('category') || undefined,
+      cat_questions: storage.get('category') || undefined,
       lastClicked: '',
       questionNb: storage.get('questionNb') || 0,
       score: storage.get('score') || 0,
@@ -44,13 +43,6 @@ class CategoriesContainer extends React.Component {
     this.setState({categories: data , isLoading: false});
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
-
-    let itemsRef = firebase.database().ref('categories');
-
-    itemsRef.on('value', snapshot => {
-      console.log('hello');
-      console.log(snapshot.val());
-    });
   }
 
   displayMobile = () => {
@@ -66,7 +58,7 @@ class CategoriesContainer extends React.Component {
 
     this.setState({
       click: true,
-      questions: getQuestions,
+      cat_questions: getQuestions,
       isClicked: true
     })
 
@@ -115,11 +107,11 @@ class CategoriesContainer extends React.Component {
 
   verifyAnswer = () => {
     const questions = storage.get('category');
-    let answer = questions.clues[this.state.questionNb].answer;
+    let answer = questions.questions[this.state.questionNb].answer;
 
-    answer = answer.replace(/[^a-zA-Z0-9 ]/g, "");
+    console.log(this.state.questionNb);
     
-    if(this.state.questionNb <= this.state.questions.clues.length - 1)
+    if(this.state.questionNb <= this.state.cat_questions.questions.length - 1)
     this.state.inputValue === answer && this.state.inputValue !== "" ? this.correct() : this.wrong();
     this.setState({isFocus: false});
   }
@@ -137,6 +129,7 @@ class CategoriesContainer extends React.Component {
 
   // If wrong update state and add anim
   wrong = () => {
+    console.log('hello');
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
       this.setState(prevState => ({
         attempt: prevState.attempt - 1,
@@ -200,11 +193,10 @@ class CategoriesContainer extends React.Component {
     if(!this.state.click){
       page = <Home/>
     } else {
-      const {questions , questionNb , score , attempt , inputValue} = this.state;
+      const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
       page = 
       <Question
-      questions={questions}
-      question={questions.clues}
+      cat_questions={cat_questions}
       questionNb={questionNb}
       score={score}
       attempt={attempt}
