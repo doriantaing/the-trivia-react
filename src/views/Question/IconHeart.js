@@ -30,6 +30,15 @@ const IconHeart = ({attempt}) => {
           <Icon src={heart} alt=""/>
         </IconContainer>
       )
+
+    case 0:
+        return(
+          <IconContainer>
+          <Icon src={lose} alt=""/>
+          <Icon src={lose} alt=""/>
+          <Icon src={lose} alt=""/>
+        </IconContainer>
+        )
     default: 
     console.log('You Broke my fucking game')
   } 

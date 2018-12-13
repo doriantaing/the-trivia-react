@@ -108,8 +108,6 @@ class CategoriesContainer extends React.Component {
   verifyAnswer = () => {
     const questions = storage.get('category');
     let answer = questions.questions[this.state.questionNb].answer;
-
-    console.log(this.state.questionNb);
     
     if(this.state.questionNb <= this.state.cat_questions.questions.length - 1)
     this.state.inputValue === answer && this.state.inputValue !== "" ? this.correct() : this.wrong();
@@ -139,7 +137,7 @@ class CategoriesContainer extends React.Component {
         
       if(this.state.attempt >= 1){
         this.animWrong.current.classList.add('shake');
-
+        console.log(this.animWrong.current);
         setTimeout(() => {
           this.animWrong.current.classList.remove('shake')
         }, 500);
