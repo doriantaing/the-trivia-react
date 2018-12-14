@@ -4,6 +4,13 @@ const port = process.env.PORT || 5000;
 const categoryJson = require('./category.json');
 const categoriesJson = require('./categories.json');
     
+app.set('view engine' , 'ejs');
+app.use(express.static('./public'));
+
+app.route('/')
+   .get( (req, res) => {
+      res.render('index');
+   })
 
 app.route('/api/category')
    .get( (req, res) => {
@@ -23,4 +30,9 @@ app.route('/api/categories/id=:id')
        answer !== undefined ? res.send(answer) : res.send(dataError);
     });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+
+app.get('*' , (req , res) => {
+   res.status(404).send('Get the fuck out ');
+})
+
+ app.listen(port, () => console.log(`Listening on port ${port}`));

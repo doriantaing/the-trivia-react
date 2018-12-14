@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@haiku/vicorch-loaderannimation": "0.0.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-generator": "^4.16.0",
     "node-sass": "^4.9.4",

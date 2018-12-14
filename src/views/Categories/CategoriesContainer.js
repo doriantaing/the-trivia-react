@@ -38,11 +38,21 @@ class CategoriesContainer extends React.Component {
   }
 
   async componentDidMount() {
+
+    // handle Loader
     this.setState({isLoading: true})
+    setTimeout(() => {
+       this.setState({isLoading: false})
+    }, 3000)
+
+    // fetch data
     const data = await api.getCategories();
-    this.setState({categories: data , isLoading: false});
+    this.setState({categories: data });
+   
+    // handle mobile display
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
+    
   }
 
   displayMobile = () => {
@@ -108,7 +118,6 @@ class CategoriesContainer extends React.Component {
   verifyAnswer = () => {
     const questions = storage.get('category');
     let answer = questions.questions[this.state.questionNb].answer;
-    
     if(this.state.questionNb <= this.state.cat_questions.questions.length - 1)
     this.state.inputValue === answer && this.state.inputValue !== "" ? this.correct() : this.wrong();
     this.setState({isFocus: false});
@@ -137,9 +146,10 @@ class CategoriesContainer extends React.Component {
         
       if(this.state.attempt >= 1){
         this.animWrong.current.classList.add('shake');
-        console.log(this.animWrong.current);
+        debugger;
         setTimeout(() => {
-          this.animWrong.current.classList.remove('shake')
+          this.animWrong.current.classList.remove('shake');
+          debugger;
         }, 500);
       }
     }
