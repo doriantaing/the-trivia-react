@@ -3,6 +3,7 @@ import Categories from './Categories';
 import api from '../../helpers/api';
 import storage from '../../helpers/storage';
 import Home from '../Home/Home';  
+import HomeMobile from '../Home/HomeMobile';
 import Question from '../Question/Question';
 import {Container, LoaderContainer , LoaderText} from './style/CategoriesStyle';
 import Loaderannimation from '@haiku/vicorch-loaderannimation/react';
@@ -38,7 +39,7 @@ class CategoriesContainer extends React.Component {
   }
 
   async componentDidMount() {
-
+    
     // handle Loader
     this.setState({isLoading: true})
     setTimeout(() => {
@@ -52,7 +53,6 @@ class CategoriesContainer extends React.Component {
     // handle mobile display
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
-    
   }
 
   displayMobile = () => {
@@ -64,8 +64,9 @@ class CategoriesContainer extends React.Component {
   async eventClick(element) {
     
     element = element.target;
+    console.log(element);
     const getQuestions = await api.getCategoryById(element.classList[0]);
-
+    console.log(getQuestions);
     this.setState({
       click: true,
       cat_questions: getQuestions,
@@ -136,7 +137,6 @@ class CategoriesContainer extends React.Component {
 
   // If wrong update state and add anim
   wrong = () => {
-    console.log('hello');
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
       this.setState(prevState => ({
         attempt: prevState.attempt - 1,
@@ -146,10 +146,8 @@ class CategoriesContainer extends React.Component {
         
       if(this.state.attempt >= 1){
         this.animWrong.current.classList.add('shake');
-        debugger;
         setTimeout(() => {
           this.animWrong.current.classList.remove('shake');
-          debugger;
         }, 500);
       }
     }
@@ -197,7 +195,7 @@ class CategoriesContainer extends React.Component {
 
   render() {
     let page;
-
+    
     if(!this.state.click){
       page = <Home/>
     } else {
@@ -218,6 +216,7 @@ class CategoriesContainer extends React.Component {
       />
     }
 
+    // Loader
     if(this.state.isLoading){
       return(
         <LoaderContainer>
@@ -227,18 +226,26 @@ class CategoriesContainer extends React.Component {
         
       )
     } else {
-      return (
-        <Container>
-          <Categories 
-          isClicked={this.state.click} 
-          categories={this.state.categories} 
-          eventClick={this.eventClick} 
-          isMobile={this.state.isMobile}
-          clickMobile={this.clickMenu}
-          />
-          {page}
-        </Container>
-      )
+      // Display on Desktop
+      if (!this.state.isMobile){
+        return (
+          <Container>
+            <Categories 
+            isClicked={this.state.click} 
+            categories={this.state.categories} 
+            eventClick={this.eventClick} 
+            isMobile={this.state.isMobile}
+            clickMobile={this.clickMenu}
+            />
+            {page}
+          </Container>
+        )
+      // Display on Mobile
+      } else {
+        return(
+          <HomeMobile/>
+        )
+      }
     }
   }
 }

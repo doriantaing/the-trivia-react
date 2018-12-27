@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@haiku/vicorch-loader": "0.0.1",
     "@haiku/vicorch-loaderannimation": "0.0.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",

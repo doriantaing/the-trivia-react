@@ -7,6 +7,9 @@ body,h1{
 body{
   background: #f4f5f9;
   font-family: 'Lato', Helvetica , sans-serif;
+  @media screen and (max-width: 768px){
+    background: #f9aa33;
+  }
 }
 
 $primary-color: #000;

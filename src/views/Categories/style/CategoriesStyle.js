@@ -8,6 +8,7 @@ export const Container = styled.section `
     justify-content: center;
     height: 100vh;
     overflow: hidden;
+    margin-top: 200px;
   }
 `
 
@@ -129,6 +130,10 @@ export const LoaderContainer = styled.div `
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-top: 100px;
+  @media screen and (max-width: 768px){
+    margin-right: 50px;
+  }
 `
 
 export const LoaderText = styled.h3`
