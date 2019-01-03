@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import IconHeart from './IconHeart';
+import IconHeart from './../Question/IconHeart';
 import {Section, SectionContainer , GlobalStyle , QuestionContent , QuestionText , QuestionInput , QuestionButton , TopRight} from './style/QuestionStyle';
 
 
@@ -31,7 +31,7 @@ const Question = ({
             onChange={eventChange}
             onKeyUp={eventChange}
             onKeyDown={keyEnter}
-            placeholder="Answer..."
+            placeholder="Réponse..."
             value={inputValue}
             className={isFocus ? "focus" : ""}
             />
@@ -42,7 +42,7 @@ const Question = ({
               <p>{score} {score < 2 ? "point": "points"}</p>
             </TopRight>
 
-            <QuestionButton type="submit" onClick={eventClick}>Enter</QuestionButton>
+            <QuestionButton type="submit" onClick={eventClick}>Entrer</QuestionButton>
           </QuestionContent>
         )}
 

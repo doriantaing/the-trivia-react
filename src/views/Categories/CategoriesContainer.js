@@ -3,11 +3,10 @@ import Categories from './Categories';
 import api from '../../helpers/api';
 import storage from '../../helpers/storage';
 import Home from '../Home/Home';  
-import HomeMobile from '../Home/HomeMobile';
+import MobileContainer from '../Mobile/MobileContainer';
 import Question from '../Question/Question';
-import {Container, LoaderContainer , LoaderText} from './style/CategoriesStyle';
-import Loaderannimation from '@haiku/vicorch-loaderannimation/react';
-
+import {Container, LoaderContainer , LoaderText , LoaderLogo} from './style/CategoriesStyle';
+import Loader from '@haiku/vicorch-loader/react';
 
 
 class CategoriesContainer extends React.Component {
@@ -54,19 +53,17 @@ class CategoriesContainer extends React.Component {
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
   }
-
+  
   displayMobile = () => {
-    this.state.windowWidth > 767 ? this.setState({isMobile: false, windowWidth: window.innerWidth}) : this.setState({isMobile: true, windowWidth: window.innerWidth})
+    this.state.windowWidth >= 768 ? this.setState({isMobile: false, windowWidth: window.innerWidth}) : this.setState({isMobile: true, windowWidth: window.innerWidth})
   }
   
 
   // On Click Categories
   async eventClick(element) {
-    
+    element.preventDefault();
     element = element.target;
-    console.log(element);
     const getQuestions = await api.getCategoryById(element.classList[0]);
-    console.log(getQuestions);
     this.setState({
       click: true,
       cat_questions: getQuestions,
@@ -140,6 +137,7 @@ class CategoriesContainer extends React.Component {
     if (this.state.attempt > 0 && this.state.inputValue !== '') {
       this.setState(prevState => ({
         attempt: prevState.attempt - 1,
+        questionNb: prevState.questionNb + 1,
         inputValue: '',
         isWrong: true
       }), this.storeLocal)
@@ -220,7 +218,9 @@ class CategoriesContainer extends React.Component {
     if(this.state.isLoading){
       return(
         <LoaderContainer>
-        <Loaderannimation className='loader' loop={true} />
+        <LoaderLogo>
+        <Loader className='loader' loop={true} />
+        </LoaderLogo>
         <LoaderText>Loading ...</LoaderText>
         </LoaderContainer>
         
@@ -234,8 +234,6 @@ class CategoriesContainer extends React.Component {
             isClicked={this.state.click} 
             categories={this.state.categories} 
             eventClick={this.eventClick} 
-            isMobile={this.state.isMobile}
-            clickMobile={this.clickMenu}
             />
             {page}
           </Container>
@@ -243,7 +241,9 @@ class CategoriesContainer extends React.Component {
       // Display on Mobile
       } else {
         return(
-          <HomeMobile/>
+          <MobileContainer
+            categories={this.state.categories}
+          />
         )
       }
     }

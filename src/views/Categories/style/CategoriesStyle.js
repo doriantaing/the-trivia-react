@@ -3,13 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.section `
   display: grid;
   grid-template-columns: 280px 1fr;
-  @media (max-width: 767px){
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-    margin-top: 200px;
-  }
 `
 
 export const CategoriesTitle = styled.h4 `
@@ -17,11 +10,6 @@ export const CategoriesTitle = styled.h4 `
   font-size: 24px;
   padding: 20px 0 40px;
   margin: 0;
-  @media (max-width: 767px){
-    padding: 14px 0 18px 16px;
-    text-align: left;
-    font-size: 20px;
-  }
 `
 
 export const CategoriesContainer = styled.section `
@@ -30,15 +18,6 @@ export const CategoriesContainer = styled.section `
   text-align: left;
   padding-left: 20px;
   transition: 0.5s;
-  @media (max-width: 767px){
-    position: fixed;
-    bottom: -2000px;
-    background: #344955;
-    padding: 67px 0 0;
-    height: calc(100% - 123px);
-    width: 100%;
-    text-align: center;
-  }
 `
 
 export const LinkCategories = styled.p `
@@ -58,41 +37,6 @@ export const LinkCategories = styled.p `
    }
 `
 
-export const MobileMenu = styled.div`
-   border: 3px solid #fff;
-   background: #344955;
-   width: 35px;
-   height: 35px;
-   position: absolute;
-   top: -21px;
-   left: 50%;
-   transform: translateX(-50%) rotate(45deg); 
-   cursor: pointer;
-   z-index: 1;
-   transition: 0.5s;
-`
-
-export const MobileMenuContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   height: 100%;
-   transform: rotate(-45deg);
-   pointer-events: none;
-`
-
-export const MenuLine = styled.div`
-  background: #f9aa33;
-  width: 18px;
-  height: 2px;
-  margin-top: 5px;
-  pointer-events: none;
-  &:first-child{
-    margin-top: 0;
-  }
-`
-
 
 export const CategoriesContent = styled.div `
   background: #f4f5f9;
@@ -100,28 +44,6 @@ export const CategoriesContent = styled.div `
   color: #fff;
   width: 260px;
   transition: 0.5s;
-  @media (max-height: 616px){
-    height: 100%;
-  }
-  @media (max-width: 767px){
-    height: auto;
-    width: 100%;
-    position: fixed; 
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-  }
-
-  &.open{
-    background : #f4f5f9;
-    ${MobileMenu} {
-      background: #f4f5f9;
-      border-color: #344955;
-    }
-    ${CategoriesContainer} {
-      bottom: 56px;
-    }      
-  }
 `
 
 export const LoaderContainer = styled.div `
@@ -130,10 +52,7 @@ export const LoaderContainer = styled.div `
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-top: 100px;
-  @media screen and (max-width: 768px){
-    margin-right: 50px;
-  }
+  position: relative;
 `
 
 export const LoaderText = styled.h3`
@@ -144,4 +63,14 @@ export const LoaderText = styled.h3`
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+`
+
+export const LoaderLogo = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  svg{
+    width: 105px;
+  }
 `

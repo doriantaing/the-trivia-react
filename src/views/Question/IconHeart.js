@@ -1,7 +1,7 @@
 import React from 'react';
 import {IconContainer, Icon} from './style/QuestionStyle';
-import lose from './../lose.svg';
-import heart from './../heart.svg';
+import lose from './../img/lose.svg';
+import heart from './../img/heart.svg';
 
 
 const IconHeart = ({attempt}) => {
@@ -40,10 +40,10 @@ const IconHeart = ({attempt}) => {
         </IconContainer>
         )
     default: 
-    console.log('You Broke my fucking game')
+    console.log('You broke my fucking game')
   } 
 }
 
 
 
-export default IconHeart
+export default IconHeart;

@@ -5,38 +5,26 @@
     },
     {
         "id": "1",
-        "title": "sushi"
+        "title": "Qui a écrit quoi ?"
     },
     {
         "id": "2",
-        "title" : "football"
+        "title" : "Films fantastiques"
     },
     {
         "id": "3",
-        "title": "burger"
+        "title": "Méchants du cinéma"
     },
     {
         "id": "4",
-        "title" : "hetic"
+        "title" : "Disney"
     },
     {
         "id": "5",
-        "title" : "caca"
+        "title" : "Capitales européennes"
     },
     {
         "id": "6",
-        "title": "china"
-    },
-    {
-        "id": "7",
-        "title" : "france"
-    },
-    {
-        "id": "8",
-        "title": "gilets jaunes"
-    },
-    {
-        "id": "9",
-        "title" : "star trek"
+        "title": "Surnom des sportifs"
     }
 ]

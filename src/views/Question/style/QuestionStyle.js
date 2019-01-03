@@ -1,5 +1,5 @@
 import styled, {createGlobalStyle} from 'styled-components';
-import patern from '../../patern.svg';
+import patern from './../../img/patern.svg';
 
 
 export const GlobalStyle = createGlobalStyle `
