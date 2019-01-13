@@ -172,6 +172,7 @@ class CategoriesContainer extends React.Component {
     storage.set('score', 0);
   }
 
+
   // If user press ('enter') , verify value
   keyEnter = (el) => {
     if(this.state.inputValue !== '' && el.keyCode === 13){
@@ -182,6 +183,7 @@ class CategoriesContainer extends React.Component {
   render() {
     let page;
     const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
+
     
     if(!this.state.click){
       page = <Home/>
@@ -203,6 +205,7 @@ class CategoriesContainer extends React.Component {
     }
 
     // If Loading display this
+
     if(this.state.isLoading){
       return(
         <LoaderContainer>
@@ -244,6 +247,7 @@ class CategoriesContainer extends React.Component {
             keyEnter={this.keyEnter}
             animWrong={this.animWrong}
             isMobile={this.state.isMobile}
+
           />
         )
       }

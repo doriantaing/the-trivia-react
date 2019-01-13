@@ -13,6 +13,7 @@ export const CategoriesTitle = styled.h4 `
   @media (max-width: 768px){
      color: #fff;
   }
+
 `
 
 export const CategoriesContainer = styled.section `
@@ -62,6 +63,7 @@ export const CategoriesContent = styled.div `
     width: 100%;
     background: #f9aa33;
   }
+
 `
 
 export const LoaderContainer = styled.div `
