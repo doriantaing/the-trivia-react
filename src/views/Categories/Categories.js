@@ -6,10 +6,10 @@ import {
   LinkCategories,
 } from './style/CategoriesStyle';
 
-const Categories = ({categories, eventClick}) => (
+const Categories = ({title,categories, eventClick}) => (
   <CategoriesContent>
 
-    <CategoriesTitle>寿司ゲーム</CategoriesTitle>
+    <CategoriesTitle>{title}</CategoriesTitle>
     {categories && (
       <CategoriesContainer>
         {categories.map(category => (

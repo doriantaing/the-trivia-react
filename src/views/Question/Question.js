@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import IconHeart from './../Question/IconHeart';
-import {Section, SectionContainer , GlobalStyle , QuestionContent , QuestionText , QuestionInput , QuestionButton , TopRight} from './style/QuestionStyle';
+import {Section, SectionContainer , GlobalStyle , QuestionContent , QuestionText , QuestionInput , QuestionButton , TopRight , MobileFooter , MobileFooterTitle , MobileButton, GameOver} from './style/QuestionStyle';
 
 
 const Question = ({
@@ -15,7 +15,9 @@ const Question = ({
   inputValue,
   isFocus,
   keyEnter,
-  animWrong
+  animWrong,
+  isMobile,
+  mobileClick,
 }) => {
   return (
     <Section>
@@ -47,19 +49,30 @@ const Question = ({
         )}
 
         {attempt === 0 && (
-          <QuestionContent>
-            <h1>Game Over</h1>
-
-            <QuestionText>You won {score} points</QuestionText>
-
-            <QuestionButton restartGame onClick={restartGame}>Try Again</QuestionButton>
-
-            <TopRight>
-              <IconHeart attempt={attempt}/>
-            </TopRight>
-          </QuestionContent>
+          <GameOver>
+            <QuestionContent>
+              <h1>Game Over</h1>
+  
+              <QuestionText>Ton score est de {score} / {questionNb}</QuestionText>
+  
+              <QuestionButton restartGame onClick={restartGame}>Try Again</QuestionButton>
+  
+              <TopRight>
+                <IconHeart attempt={attempt}/>
+              </TopRight>
+            </QuestionContent>
+          </GameOver>
         )}
       </SectionContainer>
+
+      {isMobile && (
+        <div>
+          <MobileButton onClick={mobileClick}>Retour</MobileButton>
+          <MobileFooter>
+            <MobileFooterTitle>寿司ゲーム</MobileFooterTitle>
+          </MobileFooter>
+        </div>
+      )}
     </Section>
   )
 }

@@ -7,6 +7,12 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 #### https://zpl.io/V0JjBqR
 
+### To use the project locally , start server
+
+- npm run start // to start react project
+- cd server // enter server folder 
+- node server // start node server
+
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)

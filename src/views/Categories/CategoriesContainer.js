@@ -30,15 +30,14 @@ class CategoriesContainer extends React.Component {
       menuOpen: false,
       windowWidth: window.innerWidth,
       isClicked: storage.get('click') || false,
-      items: []
+      randomNb: Math.floor(Math.random() * 6)
     }
     
     this.animWrong = React.createRef();
     this.eventClick = this.eventClick.bind(this);
   }
 
-  async componentDidMount() {
-    
+  async componentDidMount() {   
     // handle Loader
     this.setState({isLoading: true})
     setTimeout(() => {
@@ -48,7 +47,7 @@ class CategoriesContainer extends React.Component {
     // fetch data
     const data = await api.getCategories();
     this.setState({categories: data });
-   
+
     // handle mobile display
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
@@ -64,10 +63,11 @@ class CategoriesContainer extends React.Component {
     element.preventDefault();
     element = element.target;
     const getQuestions = await api.getCategoryById(element.classList[0]);
+
     this.setState({
       click: true,
       cat_questions: getQuestions,
-      isClicked: true
+      isClicked: true,
     })
 
     // Store data in local storage
@@ -171,33 +171,23 @@ class CategoriesContainer extends React.Component {
     storage.set('questionNb', 0);
     storage.set('score', 0);
   }
-  
-  // Show and Hide menu in Mobile
-  clickMenu = (element) => {
-    let parentElement = element.target.parentElement;
-    if(!this.state.menuOpen){
-      parentElement.classList.add('open');
-      this.setState({menuOpen: true})
-    } else {
-      parentElement.classList.remove('open');
-      this.setState({menuOpen: false})
-    }
-  }
+
 
   // If user press ('enter') , verify value
   keyEnter = (el) => {
     if(this.state.inputValue !== '' && el.keyCode === 13){
-      this.verifyAnswer();
+      this.verifyAnswer(); 
     }
   }
 
   render() {
     let page;
+    const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
+
     
     if(!this.state.click){
       page = <Home/>
     } else {
-      const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
       page = 
       <Question
       cat_questions={cat_questions}
@@ -214,7 +204,8 @@ class CategoriesContainer extends React.Component {
       />
     }
 
-    // Loader
+    // If Loading display this
+
     if(this.state.isLoading){
       return(
         <LoaderContainer>
@@ -231,7 +222,7 @@ class CategoriesContainer extends React.Component {
         return (
           <Container>
             <Categories 
-            isClicked={this.state.click} 
+            title='寿司ゲーム'
             categories={this.state.categories} 
             eventClick={this.eventClick} 
             />
@@ -243,6 +234,20 @@ class CategoriesContainer extends React.Component {
         return(
           <MobileContainer
             categories={this.state.categories}
+            categoriesClick={this.eventClick}
+            cat_questions={cat_questions}
+            questionNb={questionNb}
+            score={score}
+            attempt={attempt}
+            eventChange={this.handleChange}
+            eventClick={this.verifyAnswer}
+            restartGame={this.restartGame}
+            inputValue={inputValue}
+            isFocus={this.state.isFocus}
+            keyEnter={this.keyEnter}
+            animWrong={this.animWrong}
+            isMobile={this.state.isMobile}
+
           />
         )
       }

@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import MobileHome from './MobileHome/MobileHome';
-import MobileCategories from './MobileCategories/MobileCategories';
-import MobileQuestions from './MobileQuestions/MobileQuestions';
+import Categories from './../Categories/Categories';
+import Questions from './../Question/Question';
 
 class MobileContainer extends Component {
     state = {
@@ -12,21 +12,54 @@ class MobileContainer extends Component {
     }
 
 
-    startGame = () => {
+    eventClick = (element) => {
         let {isHome , isCategory , isQuestion} = this.state;
         if(isHome && !isCategory && !isQuestion){
             this.setState({
                 isHome: false,
                 isCategory: true,
             });
+        } else if(!isHome && isCategory && !isQuestion){
+            this.props.categoriesClick(element);
+
+            this.setState({
+                isHome: false,
+                isCategory: false,
+                isQuestion: true,
+            });
+        } else if(!isHome && !isCategory && isQuestion){
+            this.setState({
+                isHome: false,
+                isCategory: true,
+                isQuestion: false,
+            });
         }
-        console.log(this.state);    
     }
+
     
     render(){
-        let {isHome , isCategory} = this.state;
-        let mobileComponent = isHome ? <MobileHome eventClick={this.startGame}/>  : isCategory ? <MobileCategories categories={this.state.categories}/> : <MobileQuestions/>;
-        
+        let {isHome , isCategory , categories} = this.state;
+        let {cat_questions , questionNb, score , attempt , eventChange , eventClick , restartGame , inputValue , isFocus , keyEnter , animWrong ,isMobile} = this.props;
+
+        let mobileHome = <MobileHome eventClick={this.eventClick}/> ;
+        let mobileCategories = <Categories title='Sélectionner une catégorie' categories={categories} eventClick={this.eventClick}/>;
+        let mobileQuestions =  
+        <Questions cat_questions={cat_questions}
+        questionNb={questionNb}
+        score={score}
+        attempt={attempt}
+        eventChange={eventChange}    
+        eventClick={eventClick}
+        restartGame={restartGame}
+        inputValue={inputValue}
+        isFocus={isFocus}
+        keyEnter={keyEnter}
+        animWrong={animWrong}
+        isMobile={isMobile}
+        mobileClick={this.eventClick} />
+
+        let mobileComponent = isHome ? mobileHome : isCategory ? mobileCategories : mobileQuestions;
+
         return (
             <div>
                 {mobileComponent}

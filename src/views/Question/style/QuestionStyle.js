@@ -14,6 +14,10 @@ export const Section = styled.div `
   align-items: center; 
   background: url(${patern}) no-repeat center center;
   background-size: cover;
+  @media (max-width: 768px){
+    height: 100vh;
+    background: none;
+  }
 `
 
 export const SectionContainer = styled.section `
@@ -38,6 +42,13 @@ export const SectionContainer = styled.section `
       transform: rotate(10deg);
     }
   }
+
+  @media (max-width: 768px){
+    min-width: unset;
+    max-width: calc(100% - 30px);
+    padding: 20px 0;
+  }
+
 `
 
 export const QuestionText = styled.p `
@@ -45,6 +56,10 @@ export const QuestionText = styled.p `
   font-size: 18px;
   margin: 22px 0;
   max-width: 400px;
+  @media (max-width: 768px){
+    order: 2;
+  }
+
 `
 
 export const QuestionContent = styled.div `
@@ -71,6 +86,14 @@ export const QuestionButton = styled.button `
   cursor: pointer;
   transition: .2s;
   outline: none;
+  @media (max-width: 768px){
+    bottom: -80px;
+    right: 50%;
+    transform: translateX(50%);
+    width: calc(100% - 30px);
+    padding: 15px 0;
+  }
+
 `
 
 
@@ -96,12 +119,26 @@ export const QuestionInput = styled.input `
       opacity: 1;
     }
   }
+  @media (max-width: 768px){
+    order: 3;
+  }
+
 `
 
 export const TopRight = styled.div `
   position: absolute;
   right: 10px;
   top: 10px;
+  @media (max-width: 768px){
+    position: static;
+    order: -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
 `
 
 export const IconContainer = styled.div`
@@ -113,4 +150,46 @@ export const Icon = styled.img`
    width: 26px;
    height: 26px;
    margin-right: 8px;
+`
+
+export const MobileFooter = styled.div`
+  background: #f4f5f9;
+  width: 100%;
+  color: #f9aa33;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+`
+
+export const MobileFooterTitle = styled.h4`
+  text-align: left;
+  margin-left: 20px;
+`
+
+export const MobileButton = styled.button`
+  background: none;
+  border: 1px solid #f4f5f9;
+  border-radius: 0px;
+  color: #f4f5f9;
+  position: fixed;
+  top: 40px; 
+  left: 20px;
+  font-size: 14px;
+  padding: 7px;
+  outline: none;
+  cursor: pointer;
+`
+
+export const GameOver = styled.div`
+  @media(max-width: 768px){
+    ${TopRight}{
+      display: none;
+    }
+
+    ${QuestionButton}{
+      transform: none;
+      margin: 25px 0 10px;
+    }
+  }
+
 `

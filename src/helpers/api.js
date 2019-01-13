@@ -1,7 +1,7 @@
 class api {
   
   async getCategories() {
-    const response = await fetch('api/category');
+    const response = await fetch('/api/category');
     const json = await response.json();
     return json;
   }
