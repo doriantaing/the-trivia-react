@@ -48,6 +48,7 @@ export const SectionContainer = styled.section `
     max-width: calc(100% - 30px);
     padding: 20px 0;
   }
+
 `
 
 export const QuestionText = styled.p `
@@ -58,6 +59,7 @@ export const QuestionText = styled.p `
   @media (max-width: 768px){
     order: 2;
   }
+
 `
 
 export const QuestionContent = styled.div `
@@ -91,6 +93,7 @@ export const QuestionButton = styled.button `
     width: calc(100% - 30px);
     padding: 15px 0;
   }
+
 `
 
 
@@ -119,6 +122,7 @@ export const QuestionInput = styled.input `
   @media (max-width: 768px){
     order: 3;
   }
+
 `
 
 export const TopRight = styled.div `
@@ -134,6 +138,7 @@ export const TopRight = styled.div `
     width: 100%;
     margin-bottom: 20px;
   }
+
 `
 
 export const IconContainer = styled.div`
@@ -186,4 +191,5 @@ export const GameOver = styled.div`
       margin: 25px 0 10px;
     }
   }
+
 `
