@@ -3,14 +3,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 const categoryJson = require('./category.json');
 const categoriesJson = require('./categories.json');
-    
-app.set('view engine' , 'ejs');
-app.use(express.static('./public'));
 
-app.route('/')
-   .get( (req, res) => {
-      res.render('index');
-   })
+app.use(function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "https://sushi-gemu.doriantaing.fr");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+ });
 
 app.route('/api/category')
    .get( (req, res) => {

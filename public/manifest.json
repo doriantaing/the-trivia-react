@@ -3,7 +3,7 @@
   "name": "寿司ゲーム",
   "icons": [
     {
-      "src": "sushiGemu.png",
+      "src": "images/icon.png",
       "type": "image/png",
       "sizes": "192x192 512x512"
     }
