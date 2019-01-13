@@ -1,29 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import PropTypes from "prop-types";
+import {HomeContent , HomeTitle} from './style/HomeStyle';
 
-const Home = ({categories}) => (
-  <section>
-    <h1>Homepage</h1>
-    {categories.length > 0 && (
-      <section>
-         {categories.map(category => (
-           <Link to={`/categories/${category.id}`} key={category.id}>{category.title}</Link>
-         ))}
-      </section>
-    )}
-  </section>
+const Home = () => (
+  <div>
+    <HomeContent>
+      <HomeTitle>Select a Category</HomeTitle>
+    </HomeContent>
+  </div>
 )
-
-Home.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      title: PropTypes.title,
-
-    })
-  ),
-};
-
 
 export default Home;

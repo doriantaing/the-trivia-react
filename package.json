@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@haiku/vicorch-loader": "0.0.1",
+    "@haiku/vicorch-loaderannimation": "0.0.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-generator": "^4.16.0",
+    "node-sass": "^4.9.4",
     "react": "^16.6.0",
+    "react-cookie": "^3.0.4",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "styled-components": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -17,6 +25,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "http://localhost:5000",
   "browserslist": [
     ">0.2%",
     "not dead",

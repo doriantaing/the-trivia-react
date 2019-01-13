@@ -1,0 +1,31 @@
+
+body,h1{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background: #f4f5f9;
+  font-family: 'Lato', Helvetica , sans-serif;
+  @media screen and (max-width: 768px){
+    background: #f9aa33;
+  }
+}
+
+$primary-color: #000;
+
+
+.App {
+    text-align: center;
+}
+
+.loader{
+  display: flex;
+  justify-content: center;
+  top: 100px;
+}
+
+// .categoriesMobile{
+//   transform: translateX(1000px);
+//   transition: 0.5s;
+// }
