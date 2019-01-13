@@ -30,7 +30,6 @@ class CategoriesContainer extends React.Component {
       menuOpen: false,
       windowWidth: window.innerWidth,
       isClicked: storage.get('click') || false,
-      randomNb: Math.floor(Math.random() * 6)
     }
     
     this.animWrong = React.createRef();

@@ -55,7 +55,7 @@ const Question = ({
   
               <QuestionText>Ton score est de {score} / {questionNb}</QuestionText>
   
-              <QuestionButton restartGame onClick={restartGame}>Try Again</QuestionButton>
+              <QuestionButton restartGame onClick={restartGame}>Recommencer</QuestionButton>
   
               <TopRight>
                 <IconHeart attempt={attempt}/>
