@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.section `
-  display: grid;
-  grid-template-columns: 280px 1fr;
+    width: 300px;
+    height: 100%;
 `
 
 export const CategoriesTitle = styled.h4 `
@@ -10,6 +10,7 @@ export const CategoriesTitle = styled.h4 `
   font-size: 24px;
   padding: 20px 0 40px;
   margin: 0;
+  text-align: center;
   @media (max-width: 768px){
      color: #fff;
   }
@@ -55,42 +56,12 @@ export const LinkCategories = styled.p `
 
 export const CategoriesContent = styled.div `
   background: #f4f5f9;
-  height: 100vh;
+  height: 100%;
   color: #fff;
-  width: 260px;
   transition: 0.5s;
   @media (max-width: 768px){
     width: 100%;
     background: #f9aa33;
   }
 
-`
-
-export const LoaderContainer = styled.div `
-  background: #f9aa33;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-`
-
-export const LoaderText = styled.h3`
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 30px;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-export const LoaderLogo = styled.div`
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  svg{
-    width: 105px;
-  }
 `

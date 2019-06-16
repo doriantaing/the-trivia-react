@@ -5,8 +5,7 @@ import storage from '../../helpers/storage';
 import Home from '../Home/Home';  
 import MobileContainer from '../Mobile/MobileContainer';
 import Question from '../Question/Question';
-import {Container, LoaderContainer , LoaderText , LoaderLogo} from './style/CategoriesStyle';
-import Loader from '@haiku/vicorch-loader/react';
+import {Container} from './style/CategoriesStyle';
 
 
 class CategoriesContainer extends React.Component {
@@ -38,10 +37,6 @@ class CategoriesContainer extends React.Component {
 
   async componentDidMount() {   
     // handle Loader
-    this.setState({isLoading: true})
-    setTimeout(() => {
-       this.setState({isLoading: false})
-    }, 3000)
 
     // fetch data
     const data = await api.getCategories();
@@ -184,38 +179,25 @@ class CategoriesContainer extends React.Component {
     const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
 
     
-    if(!this.state.click){
-      page = <Home/>
-    } else {
-      page = 
-      <Question
-      cat_questions={cat_questions}
-      questionNb={questionNb}
-      score={score}
-      attempt={attempt}
-      eventChange={this.handleChange}
-      eventClick={this.verifyAnswer}
-      restartGame={this.restartGame}
-      inputValue={inputValue}
-      isFocus={this.state.isFocus}
-      keyEnter={this.keyEnter}
-      animWrong={this.animWrong}
-      />
-    }
+    // if(!this.state.click){
+    //   page = <Home/>
+    // } else {
+    //   page = 
+    //   <Question
+    //   cat_questions={cat_questions}
+    //   questionNb={questionNb}
+    //   score={score}
+    //   attempt={attempt}
+    //   eventChange={this.handleChange}
+    //   eventClick={this.verifyAnswer}
+    //   restartGame={this.restartGame}
+    //   inputValue={inputValue}
+    //   isFocus={this.state.isFocus}
+    //   keyEnter={this.keyEnter}
+    //   animWrong={this.animWrong}
+    //   />
+    // }
 
-    // If Loading display this
-
-    if(this.state.isLoading){
-      return(
-        <LoaderContainer>
-        <LoaderLogo>
-        <Loader className='loader' loop={true} />
-        </LoaderLogo>
-        <LoaderText>Loading ...</LoaderText>
-        </LoaderContainer>
-        
-      )
-    } else {
       // Display on Desktop
       if (!this.state.isMobile){
         return (
@@ -250,7 +232,6 @@ class CategoriesContainer extends React.Component {
           />
         )
       }
-    }
   }
 }
 
