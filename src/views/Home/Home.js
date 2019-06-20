@@ -3,7 +3,7 @@ import {HomeContainer, HomeContent , HomeTitle} from './style/HomeStyle';
 import CategoriesContainer from '../Categories/CategoriesContainer';
 import {Spring} from 'react-spring'
 
-const Home = () => (
+const Home = ({data}) => (
     <HomeContainer>
       <Spring
         from={{ transform: 'translateX(-1000px)'}}
@@ -11,7 +11,7 @@ const Home = () => (
       >
         {props => (
           <div style={props}> 
-            <CategoriesContainer/>
+            <CategoriesContainer data={data}/>
           </div>
         )} 
       </Spring>

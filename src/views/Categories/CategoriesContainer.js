@@ -35,13 +35,7 @@ class CategoriesContainer extends React.Component {
     this.eventClick = this.eventClick.bind(this);
   }
 
-  async componentDidMount() {   
-    // handle Loader
-
-    // fetch data
-    const data = await api.getCategories();
-    this.setState({categories: data });
-
+  async componentDidMount() {
     // handle mobile display
     this.displayMobile();
     window.addEventListener('resize', this.displayMobile);
@@ -66,9 +60,9 @@ class CategoriesContainer extends React.Component {
 
     // Store data in local storage
 
-    await storage.set('category', getQuestions);
-    await storage.set('click', this.state.click);
-    await storage.set('isClicked', this.state.isClicked);
+    // await storage.set('category', getQuestions);
+    // await storage.set('click', this.state.click);
+    // await storage.set('isClicked', this.state.isClicked);
 
 
     // Make sure that only one category can be selected
@@ -204,10 +198,9 @@ class CategoriesContainer extends React.Component {
           <Container>
             <Categories 
             title='寿司ゲーム'
-            categories={this.state.categories} 
+            categories={this.props.data}
             eventClick={this.eventClick} 
             />
-            {page}
           </Container>
         )
       // Display on Mobile

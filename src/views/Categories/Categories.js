@@ -6,7 +6,7 @@ import {
   LinkCategories,
 } from './style/CategoriesStyle';
 
-const Categories = ({title,categories, eventClick}) => (
+const Categories = ({title, categories, eventClick}) => (
   <CategoriesContent>
 
     <CategoriesTitle>{title}</CategoriesTitle>

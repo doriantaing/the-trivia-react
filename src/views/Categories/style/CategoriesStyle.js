@@ -19,6 +19,7 @@ export const CategoriesTitle = styled.h4 `
 
 export const CategoriesContainer = styled.section `
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   text-align: left;
   padding-left: 20px;
@@ -32,7 +33,7 @@ export const CategoriesContainer = styled.section `
 `
 
 export const LinkCategories = styled.p `
-  font-size: 12px;
+  font-size: 14px;
   text-decoration: none;
   margin-bottom: 18px;
   margin-top: 0;
@@ -41,9 +42,21 @@ export const LinkCategories = styled.p `
   text-transform: uppercase;
   color: #f9aa33;
   position: relative;
+  transform-origin: left;
+  &::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background: #EF2D56;
+    transition: 0.5s;
+  }
   &.active{
-    transform: scale(1.1);
-    transform-origin: left;
+    color: #EF2D56;
+    transform: scale(1.2);
+    &::after{
+        width: 100%
+    }
   }
  
   @media (max-width: 768px){

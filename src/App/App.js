@@ -19,14 +19,13 @@ const App = () => {
     };
 
     loadData();
-  }, [])
-
+  }, []);
 
   if(data.length === 0){
     return <Loader/>
   }
   return (
-    <Home/>
+    <Home data={data}/>
   );
 }
 
