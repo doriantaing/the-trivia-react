@@ -1,7 +1,9 @@
 import React from 'react';
 import {HomeContainer, HomeContent , HomeTitle} from './style/HomeStyle';
 import CategoriesContainer from '../Categories/CategoriesContainer';
-import {Spring} from 'react-spring'
+import {Spring} from 'react-spring';
+import MyContext from '../../store/TriviaContext';
+
 
 const Home = ({data}) => (
     <HomeContainer>
@@ -10,10 +12,10 @@ const Home = ({data}) => (
         to={{ transform: 'translateX(0)' , height: '100%'}}
       >
         {props => (
-          <div style={props}> 
+          <div style={props}>
             <CategoriesContainer data={data}/>
           </div>
-        )} 
+        )}
       </Spring>
 
       <Spring

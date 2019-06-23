@@ -45,18 +45,27 @@ export const LinkCategories = styled.p `
   transform-origin: left;
   &::after{
     content: '';
-    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 0;
-    height: 1px;
-    background: #EF2D56;
+    height: 10px;
+    background: rgba(239,45,86,0.3);
     transition: 0.5s;
   }
   &.active{
     color: #EF2D56;
     transform: scale(1.2);
     &::after{
-        width: 100%
+      width: 100%;
     }
+  }
+  
+  &:hover{
+      // color: #EF2D56;
+      &::after{
+        width: 100%;
+      }
   }
  
   @media (max-width: 768px){

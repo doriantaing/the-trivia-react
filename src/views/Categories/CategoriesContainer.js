@@ -6,6 +6,7 @@ import Home from '../Home/Home';
 import MobileContainer from '../Mobile/MobileContainer';
 import Question from '../Question/Question';
 import {Container} from './style/CategoriesStyle';
+import MyContext from '../../store/TriviaContext'
 
 
 class CategoriesContainer extends React.Component {
@@ -47,10 +48,10 @@ class CategoriesContainer extends React.Component {
   
 
   // On Click Categories
-  async eventClick(element) {
+  eventClick = async(element) => {
     element.preventDefault();
     element = element.target;
-    const getQuestions = await api.getCategoryById(element.classList[0]);
+    const getQuestions = await api.getQuestionsByCategory(element.classList[0]);
 
     this.setState({
       click: true,
@@ -60,9 +61,9 @@ class CategoriesContainer extends React.Component {
 
     // Store data in local storage
 
-    // await storage.set('category', getQuestions);
-    // await storage.set('click', this.state.click);
-    // await storage.set('isClicked', this.state.isClicked);
+    await storage.set('category', getQuestions);
+    await storage.set('click', this.state.click);
+    await storage.set('isClicked', this.state.isClicked);
 
 
     // Make sure that only one category can be selected
@@ -174,21 +175,20 @@ class CategoriesContainer extends React.Component {
 
     
     // if(!this.state.click){
-    //   page = <Home/>
-    // } else {
-    //   page = 
-    //   <Question
-    //   cat_questions={cat_questions}
-    //   questionNb={questionNb}
-    //   score={score}
-    //   attempt={attempt}
-    //   eventChange={this.handleChange}
-    //   eventClick={this.verifyAnswer}
-    //   restartGame={this.restartGame}
-    //   inputValue={inputValue}
-    //   isFocus={this.state.isFocus}
-    //   keyEnter={this.keyEnter}
-    //   animWrong={this.animWrong}
+    //   return (
+    //     <Question
+    //     cat_questions={cat_questions}
+    //     questionNb={questionNb}
+    //     score={score}
+    //     attempt={attempt}
+    //     eventChange={this.handleChange}
+    //     eventClick={this.verifyAnswer}
+    //     restartGame={this.restartGame}
+    //     inputValue={inputValue}
+    //     isFocus={this.state.isFocus}
+    //     keyEnter={this.keyEnter}
+    //     animWrong={this.animWrong}
+    //    )
     //   />
     // }
 
@@ -196,11 +196,18 @@ class CategoriesContainer extends React.Component {
       if (!this.state.isMobile){
         return (
           <Container>
-            <Categories 
-            title='寿司ゲーム'
-            categories={this.props.data}
-            eventClick={this.eventClick} 
-            />
+            <MyContext.Consumer>
+              {(context) => (
+                <>
+                <Categories
+                title='寿司ゲーム'
+                categories={context.categories}
+                eventClick={context.fetchData}
+                />
+                {console.log(context)}
+                </>
+              )}
+            </MyContext.Consumer>
           </Container>
         )
       // Display on Mobile

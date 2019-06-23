@@ -1,9 +1,9 @@
 class api {
   
-  async getCategoryById(id) {
-    // const response = await fetch(`api/categories/id=${id}`);
-    // const json = await response.json();
-    // return json;
+  async getQuestionsByCategory(id) {
+    const response = await fetch(`http://localhost:5000/api/category/id=${id}`);
+    const json = await response.json();
+    return json;
   }
   
   async getCategories(){
