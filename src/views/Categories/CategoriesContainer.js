@@ -68,7 +68,7 @@ class CategoriesContainer extends React.Component {
 
     // Make sure that only one category can be selected
 
-    if(this.state.categoryClicked !== element){
+      if(this.state.categoryClicked !== element){
       this.setState({
         lastClicked: this.state.categoryClicked || '',
         categoryClicked: element,
@@ -173,39 +173,18 @@ class CategoriesContainer extends React.Component {
     let page;
     const {cat_questions , questionNb , score , attempt , inputValue} = this.state;
 
-    
-    // if(!this.state.click){
-    //   return (
-    //     <Question
-    //     cat_questions={cat_questions}
-    //     questionNb={questionNb}
-    //     score={score}
-    //     attempt={attempt}
-    //     eventChange={this.handleChange}
-    //     eventClick={this.verifyAnswer}
-    //     restartGame={this.restartGame}
-    //     inputValue={inputValue}
-    //     isFocus={this.state.isFocus}
-    //     keyEnter={this.keyEnter}
-    //     animWrong={this.animWrong}
-    //    )
-    //   />
-    // }
-
       // Display on Desktop
       if (!this.state.isMobile){
         return (
           <Container>
             <MyContext.Consumer>
               {(context) => (
-                <>
-                <Categories
-                title='寿司ゲーム'
-                categories={context.categories}
-                eventClick={context.fetchData}
-                />
-                {console.log(context)}
-                </>
+                <div>
+                  <Categories
+                  title='寿司ゲーム'
+                  context={context}
+                  />
+                </div>
               )}
             </MyContext.Consumer>
           </Container>

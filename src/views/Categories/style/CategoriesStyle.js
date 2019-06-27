@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Colors from '../../../helpers/Colors';
 
 export const Container = styled.section `
     width: 300px;
@@ -6,13 +7,13 @@ export const Container = styled.section `
 `
 
 export const CategoriesTitle = styled.h4 `
-  color: #f9aa33;
+  color: ${Colors.mainOrange};
   font-size: 24px;
   padding: 20px 0 40px;
   margin: 0;
   text-align: center;
   @media (max-width: 768px){
-     color: #fff;
+     color: ${Colors.white};
   }
 
 `
@@ -32,7 +33,7 @@ export const CategoriesContainer = styled.section `
   }
 `
 
-export const LinkCategories = styled.p `
+export const LinkCategories = styled.a `
   font-size: 14px;
   text-decoration: none;
   margin-bottom: 18px;
@@ -40,36 +41,49 @@ export const LinkCategories = styled.p `
   cursor: pointer;
   transition: 0.5s;
   text-transform: uppercase;
-  color: #f9aa33;
+  color: ${Colors.orangeOpacity};
   position: relative;
   transform-origin: left;
+  &::before{
+  content: attr(data-letters);
+  position: absolute;
+  z-index: 2;
+  overflow: hidden;
+  color: ${Colors.mainOrange};
+  white-space: nowrap;
+  width: 0;
+  transition: width 0.4s 0.3s;
+  }
   &::after{
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 10px;
-    background: rgba(239,45,86,0.3);
-    transition: 0.5s;
+    height: 16px;
+    width: 100%;
+    top: 50%;
+    margin-top: -8px;
+    right: 0;
+    background: ${Colors.greyBackground};
+    transform: translate3d(-100%,0,0);
+    transition: transform 0.4s;
+    transition-timing-function: cubic-bezier(0.7,0,0.3,1);
   }
   &.active{
-    color: #EF2D56;
+    color: #E39B2F;
     transform: scale(1.2);
-    &::after{
+    &::before{
       width: 100%;
+    }
+    &::after{
+      transform: translate3d(100%,0,0);
     }
   }
   
   &:hover{
-      // color: #EF2D56;
-      &::after{
-        width: 100%;
-      }
+      color: ${Colors.mainOrange};
   }
  
   @media (max-width: 768px){
-    color: #fff;
+    color: ${Colors.white};
     font-size: 15px;
     margin-bottom: 25px;
   }
@@ -77,13 +91,13 @@ export const LinkCategories = styled.p `
 
 
 export const CategoriesContent = styled.div `
-  background: #f4f5f9;
+  background: ${Colors.greyBackground};
   height: 100%;
-  color: #fff;
+  color: ${Colors.white};
   transition: 0.5s;
   @media (max-width: 768px){
     width: 100%;
-    background: #f9aa33;
+    background: ${Colors.mainOrange};
   }
 
 `

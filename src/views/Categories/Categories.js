@@ -6,18 +6,28 @@ import {
   LinkCategories,
 } from './style/CategoriesStyle';
 
-const Categories = ({title, categories, eventClick}) => (
-  <CategoriesContent>
+const Categories = ({title, context}) => {
+  const {categories} = context;
+  return(
+    <CategoriesContent>
+      <CategoriesTitle>{title}</CategoriesTitle>
+      {categories && (
+        <CategoriesContainer>
+          {categories.map(category => (
+            <LinkCategories
+                className={category.id}
+                key={category.id}
+                data-letters={category.title}
+                onClick={context.fetchData}
+            >
+              {category.title}
+            </LinkCategories>
+          ))}
+        </CategoriesContainer>
+      )}
+    </CategoriesContent>
+  )
+};
 
-    <CategoriesTitle>{title}</CategoriesTitle>
-    {categories && (
-      <CategoriesContainer>
-        {categories.map(category => (
-          <LinkCategories className={category.id} key={category.id} onClick={eventClick}>{category.title}</LinkCategories>
-        ))}
-      </CategoriesContainer>
-    )}
-  </CategoriesContent>
-)
 
 export default Categories;

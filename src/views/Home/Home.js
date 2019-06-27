@@ -1,8 +1,10 @@
 import React from 'react';
 import {HomeContainer, HomeContent , HomeTitle} from './style/HomeStyle';
-import CategoriesContainer from '../Categories/CategoriesContainer';
-import {Spring} from 'react-spring';
+import {Spring} from 'react-spring'
 import MyContext from '../../store/TriviaContext';
+import CategoriesContainer from '../Categories/CategoriesContainer';
+import Question from '../Question/Question';
+// import Anim from '../../helpers/anim';
 
 
 const Home = ({data}) => (
@@ -23,11 +25,26 @@ const Home = ({data}) => (
         to={{ transform: 'translateX(0)' , height: '100%' , width: '100%'}}
       >
         {props => (
-          <div style={props}>
+          <MyContext.Consumer style={props}>
+            {(context) => (
             <HomeContent>
+              {context.questions ?
+                  <Spring
+                    from={{opacity: 0}}
+                    to={{opacity: 1}}
+                  >
+                        {props => (
+                            <div style={props}>
+                              <Question questions={context.questions}/>
+                            </div>
+                        )}
+                  </Spring>
+              :
               <HomeTitle>Select a Category</HomeTitle>
+              }
             </HomeContent>
-          </div>
+            )}
+          </MyContext.Consumer>
         )}
       </Spring>
 

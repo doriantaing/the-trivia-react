@@ -1,14 +1,23 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React , {useState} from 'react';
 import IconHeart from './../Question/IconHeart';
-import {Section, SectionContainer , GlobalStyle , QuestionContent , QuestionText , QuestionInput , QuestionButton , TopRight , MobileFooter , MobileFooterTitle , MobileButton, GameOver} from './style/QuestionStyle';
+import {
+  Section,
+  SectionContainer,
+  GlobalStyle,
+  QuestionContent,
+  QuestionText,
+  QuestionInput,
+  QuestionButton,
+  TopRight,
+  MobileFooter,
+  MobileFooterTitle,
+  MobileButton,
+  GameOver
+} from './style/QuestionStyle';
 
 
 const Question = ({
   score,
-  attempt,
-  cat_questions,
-  questionNb,
   eventChange,
   eventClick,
   restartGame,
@@ -18,22 +27,29 @@ const Question = ({
   animWrong,
   isMobile,
   mobileClick,
+  questions
 }) => {
+
+  const [questionNb , changeQuestionNb] = useState(0);
+  const [attempt , changeAttempt] = useState(3);
+
+  console.log('QUESTIONS',questions[questionNb].question);
+
   return (
     <Section>
       <SectionContainer ref={animWrong}>
       
         <GlobalStyle/> 
 
-        {cat_questions && attempt > 0 && (
+        {questions && attempt > 0 && (
           <QuestionContent>
             <h1>Question {questionNb + 1}</h1>
-            <QuestionText>{ cat_questions.questions[questionNb].question}</QuestionText>
+            <QuestionText>{ questions[questionNb].question}</QuestionText>
             <QuestionInput type="text" 
             onChange={eventChange}
             onKeyUp={eventChange}
             onKeyDown={keyEnter}
-            placeholder="Réponse..."
+            placeholder="Answer..."
             value={inputValue}
             className={isFocus ? "focus" : ""}
             />
@@ -76,9 +92,5 @@ const Question = ({
     </Section>
   )
 }
-
-Question.propTypes = {
-  category: PropTypes.string
-};
 
 export default Question;
