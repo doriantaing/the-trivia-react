@@ -4,10 +4,9 @@ import {Spring} from 'react-spring'
 import MyContext from '../../store/TriviaContext';
 import CategoriesContainer from '../Categories/CategoriesContainer';
 import Question from '../Question/Question';
-// import Anim from '../../helpers/anim';
 
 
-const Home = ({data}) => (
+const Home = () => (
     <HomeContainer>
       <Spring
         from={{ transform: 'translateX(-1000px)'}}
@@ -15,7 +14,7 @@ const Home = ({data}) => (
       >
         {props => (
           <div style={props}>
-            <CategoriesContainer data={data}/>
+            <CategoriesContainer/>
           </div>
         )}
       </Spring>
@@ -35,7 +34,7 @@ const Home = ({data}) => (
                   >
                         {props => (
                             <div style={props}>
-                              <Question questions={context.questions}/>
+                              <Question context={context}/>
                             </div>
                         )}
                   </Spring>

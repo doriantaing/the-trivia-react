@@ -1,7 +1,7 @@
 import React, { useState , useEffect} from 'react';
 import './App.scss';
 import HomeContainer from '../views/Home/HomeContainer';
-import api from '../helpers/api';
+import api from '../helpers/Api';
 import Loader from '../components/Loader';
 import MyProvider from '../store/TriviaProvider';
 

@@ -1,12 +1,12 @@
-import React , {useState} from 'react';
+import React , {useState , useRef} from 'react';
 import IconHeart from './../Question/IconHeart';
+import Input from '../../helpers/Input';
 import {
   Section,
   SectionContainer,
   GlobalStyle,
   QuestionContent,
   QuestionText,
-  QuestionInput,
   QuestionButton,
   TopRight,
   MobileFooter,
@@ -14,26 +14,70 @@ import {
   MobileButton,
   GameOver
 } from './style/QuestionStyle';
+import storage from "../../helpers/Storage";
 
 
 const Question = ({
-  score,
-  eventChange,
-  eventClick,
-  restartGame,
-  inputValue,
-  isFocus,
-  keyEnter,
-  animWrong,
   isMobile,
   mobileClick,
-  questions
+  context
 }) => {
 
+  const [score, changeScore] = useState(0);
   const [questionNb , changeQuestionNb] = useState(0);
-  const [attempt , changeAttempt] = useState(3);
+  const [inputValue, changeInputValue] = useState('');
+  const [isFocus , changeFocus] = useState(false);
+  const animWrong = useRef('');
+  const {questions, attempt, changeAttempt} = context;
 
-  console.log('QUESTIONS',questions[questionNb].question);
+  const verifyAnswer = () => {
+    const test = storage.get('category');
+    let answer = questions[questionNb].answer;
+
+    // if(questionNb <= this.state.cat_questions.questions.length - 1)
+      inputValue === answer && inputValue !== "" ? correct() : wrong();
+      changeFocus(false);
+  };
+
+  // If correct update state
+  const correct = () => {
+    if(questionNb <= 10){
+      changeScore(score + 1);
+      changeQuestionNb(questionNb + 1);
+      changeInputValue('');
+
+      context.storeLocal(score, questionNb, attempt);
+    }
+  };
+
+  // If wrong update state and add anim
+  const wrong = () => {
+    if (attempt > 0 && inputValue !== '') {
+      changeAttempt();
+      // changeQuestionNb(questionNb + 1);
+      changeInputValue('');
+
+      context.storeLocal(score, questionNb, attempt);
+
+      if(attempt >= 1){
+        animWrong.current.classList.add('shake');
+
+        setTimeout(() => {
+          animWrong.current.classList.remove('shake');
+        }, 500);
+      }
+    }
+  };
+
+  const restartGame = () => {
+    changeScore(0);
+    changeAttempt(3);
+    changeQuestionNb(0);
+
+    context.storeLocal(score, questionNb, attempt);
+    storage.set('questionNb', 0);
+    storage.set('score', 0);
+  };
 
   return (
     <Section>
@@ -44,14 +88,13 @@ const Question = ({
         {questions && attempt > 0 && (
           <QuestionContent>
             <h1>Question {questionNb + 1}</h1>
-            <QuestionText>{ questions[questionNb].question}</QuestionText>
-            <QuestionInput type="text" 
-            onChange={eventChange}
-            onKeyUp={eventChange}
-            onKeyDown={keyEnter}
-            placeholder="Answer..."
-            value={inputValue}
-            className={isFocus ? "focus" : ""}
+            <QuestionText>{ questions[questionNb].question }</QuestionText>
+            <Input
+              inputValue={inputValue}
+              changeInputValue={changeInputValue}
+              verifyAnswer={verifyAnswer}
+              isFocus={isFocus}
+              changeFocus={changeFocus}
             />
             <TopRight>
               <div>
@@ -60,7 +103,7 @@ const Question = ({
               <p>{score} {score < 2 ? "point": "points"}</p>
             </TopRight>
 
-            <QuestionButton type="submit" onClick={eventClick}>Entrer</QuestionButton>
+            <QuestionButton type="submit" onClick={verifyAnswer}>Submit</QuestionButton>
           </QuestionContent>
         )}
 
@@ -69,9 +112,9 @@ const Question = ({
             <QuestionContent>
               <h1>Game Over</h1>
   
-              <QuestionText>Ton score est de {score} / {questionNb}</QuestionText>
+              <QuestionText>Score: {score}</QuestionText>
   
-              <QuestionButton restartGame onClick={restartGame}>Recommencer</QuestionButton>
+              <QuestionButton restartGame onClick={restartGame}>Try again</QuestionButton>
   
               <TopRight>
                 <IconHeart attempt={attempt}/>
