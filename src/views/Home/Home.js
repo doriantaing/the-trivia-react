@@ -2,6 +2,7 @@ import React from 'react';
 import {HomeContainer, HomeContent , HomeTitle} from './style/HomeStyle';
 import {Spring} from 'react-spring'
 import MyContext from '../../store/TriviaContext';
+import storage from '../../helpers/Storage';
 import CategoriesContainer from '../Categories/CategoriesContainer';
 import Question from '../Question/Question';
 
@@ -27,7 +28,7 @@ const Home = () => (
           <MyContext.Consumer style={props}>
             {(context) => (
             <HomeContent>
-              {context.questions ?
+              {context.questions || storage.get('category') ?
                   <Spring
                     from={{opacity: 0}}
                     to={{opacity: 1}}

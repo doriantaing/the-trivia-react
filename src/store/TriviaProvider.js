@@ -6,9 +6,10 @@ import storage from "../helpers/Storage";
 class MyProvider extends Component{
     state = {
         questions: null,
-        categoryClicked: null,
+        questionNb: storage.get('questionNb') ? storage.get('questionNb') : 0,
+        categoryClicked: storage.get('category') ? storage.get('category') : null,
         isClicked: false,
-        attempt: 3,
+        attempt: storage.get('attempt') ? storage.get('attempt') : 3,
     };
 
     fetchQuestions = async (el) => {
@@ -16,16 +17,24 @@ class MyProvider extends Component{
         const element = el.target;
         const questionsData =  await api.getQuestionsByCategory(categoryId);
         const {categoryClicked, isClicked} = this.state;
+        const categoryActive = document.querySelector(`.active`);
 
         this.setState({
             categoryClicked: element,
-            questions: questionsData
+            questions: questionsData,
         });
+        // this.generateRandomQuestion();
 
         element.classList.add('active');
-        categoryClicked !== null && categoryClicked.classList.remove('active');
 
-        await storage.set('category', element.textContent);
+        if(categoryClicked !== null && categoryActive.classList[0] !== categoryId) {
+            categoryActive.classList.remove('active');
+            this.setState({
+                attempt: 3,
+            })
+        }
+
+        await storage.set('category', categoryId);
         await storage.set('click', isClicked);
     };
 
@@ -37,25 +46,36 @@ class MyProvider extends Component{
         storage.set('attempt', attempt);
     };
 
+    generateRandomQuestion = () => {
+        this.setState({
+            questionNb: Math.floor(Math.random() * this.state.questions.length)
+        })
+    };
 
-    changeAttempt = () => {
+
+    changeAttempt = (nbr) => {
+        console.log(this.state.attempt);
         this.setState(prevState => ({
-            attempt: prevState - 1
-        }))
+            attempt: nbr ? nbr : prevState.attempt - 1
+        }));
+        console.log(this.state.attempt);
     };
 
     render(){
-        const {categories} = this.props;
-        const {questions, attempt} = this.state;
+        const {categories, storedQuestions} = this.props;
+        const {questions, attempt, questionNb} = this.state;
 
         return(
             <MyContext.Provider value={{
                 categories,
+                storedQuestions,
                 fetchData: this.fetchQuestions,
                 questions: questions,
                 attempt: attempt,
                 changeAttempt: this.changeAttempt,
                 storeLocal: this.storeLocal,
+                questionNb: questionNb,
+                generateRandom: this.generateRandomQuestion
             }}>
                 {this.props.children}
             </MyContext.Provider>

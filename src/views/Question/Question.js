@@ -23,20 +23,25 @@ const Question = ({
   context
 }) => {
 
+  const {questions, attempt, changeAttempt, storedQuestions} = context;
   const [score, changeScore] = useState(0);
   const [questionNb , changeQuestionNb] = useState(0);
   const [inputValue, changeInputValue] = useState('');
   const [isFocus , changeFocus] = useState(false);
   const animWrong = useRef('');
-  const {questions, attempt, changeAttempt} = context;
 
   const verifyAnswer = () => {
-    const test = storage.get('category');
-    let answer = questions[questionNb].answer;
+    let answer;
+
+    if(questions){
+      answer = questions[questionNb].answer;
+    } else {
+      answer = storedQuestions[questionNb].answer;
+    }
 
     // if(questionNb <= this.state.cat_questions.questions.length - 1)
-      inputValue === answer && inputValue !== "" ? correct() : wrong();
-      changeFocus(false);
+    inputValue === answer && inputValue !== "" ? correct() : wrong();
+    changeFocus(false);
   };
 
   // If correct update state
@@ -56,8 +61,6 @@ const Question = ({
       changeAttempt();
       // changeQuestionNb(questionNb + 1);
       changeInputValue('');
-
-      context.storeLocal(score, questionNb, attempt);
 
       if(attempt >= 1){
         animWrong.current.classList.add('shake');
@@ -79,16 +82,18 @@ const Question = ({
     storage.set('score', 0);
   };
 
+  const questionsData = questions || storedQuestions;
+  context.storeLocal(score, questionNb, attempt);
   return (
     <Section>
       <SectionContainer ref={animWrong}>
       
         <GlobalStyle/> 
 
-        {questions && attempt > 0 && (
+        {questionsData && attempt > 0 ?
           <QuestionContent>
             <h1>Question {questionNb + 1}</h1>
-            <QuestionText>{ questions[questionNb].question }</QuestionText>
+            <QuestionText>{ questions !== null ? questions[questionNb].question : storedQuestions[questionNb].question }</QuestionText>
             <Input
               inputValue={inputValue}
               changeInputValue={changeInputValue}
@@ -105,7 +110,10 @@ const Question = ({
 
             <QuestionButton type="submit" onClick={verifyAnswer}>Submit</QuestionButton>
           </QuestionContent>
-        )}
+            :
+          <React.Fragment>
+          </React.Fragment>
+        }
 
         {attempt === 0 && (
           <GameOver>
@@ -126,7 +134,7 @@ const Question = ({
 
       {isMobile && (
         <div>
-          <MobileButton onClick={mobileClick}>Retour</MobileButton>
+          <MobileButton onClick={mobileClick}>Back</MobileButton>
           <MobileFooter>
             <MobileFooterTitle>寿司ゲーム</MobileFooterTitle>
           </MobileFooter>

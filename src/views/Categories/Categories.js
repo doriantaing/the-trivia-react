@@ -1,4 +1,5 @@
 import React from 'react';
+import storage from '../../helpers/Storage';
 import {
   CategoriesContent,
   CategoriesTitle,
@@ -15,7 +16,7 @@ const Categories = ({title, context}) => {
         <CategoriesContainer>
           {categories.map(category => (
             <LinkCategories
-                className={category.id}
+                className={`${category.id}  ${storage.get('category') && storage.get('category') === category.id.toString() && 'active'}`}
                 key={category.id}
                 data-letters={category.title}
                 onClick={context.fetchData}
