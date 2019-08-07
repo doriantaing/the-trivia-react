@@ -83,9 +83,17 @@ export const LinkCategories = styled.a `
   }
  
   @media (max-width: 768px){
-    color: ${Colors.white};
+    color: ${Colors.greyBackground};
     font-size: 15px;
     margin-bottom: 25px;
+    transform-origin: center;
+    &::after , &::before{
+      display: none;
+    }
+    &.active{
+      color: ${Colors.white};
+      text-decoration: underline;
+    }
   }
 `
 

@@ -7,6 +7,7 @@ class MyProvider extends Component{
     state = {
         questions: null,
         questionNb: storage.get('questionNb') ? storage.get('questionNb') : 0,
+        lastClicked: null,
         categoryClicked: storage.get('category') ? storage.get('category') : null,
         isClicked: false,
         attempt: storage.get('attempt') ? storage.get('attempt') : 3,
@@ -15,23 +16,36 @@ class MyProvider extends Component{
     fetchQuestions = async (el) => {
         const categoryId = el.target.classList[0];
         const element = el.target;
-        const questionsData =  await api.getQuestionsByCategory(categoryId);
+        const questionsData = await api.getQuestionsByCategory(categoryId);
         const {categoryClicked, isClicked} = this.state;
-        const categoryActive = document.querySelector(`.active`);
+        const categoryActive = document.querySelector('.active');
+
+
+        if (categoryClicked !== categoryId) {
+            this.setState({
+                categoryClicked: element
+            })
+        }
+
 
         this.setState({
-            categoryClicked: element,
             questions: questionsData,
         });
         // this.generateRandomQuestion();
 
         element.classList.add('active');
 
-        if(categoryClicked !== null && categoryActive.classList[0] !== categoryId) {
+        if(window.innerWidth > 768 && categoryActive.classList[0] !== categoryId){
             categoryActive.classList.remove('active');
-            this.setState({
-                attempt: 3,
-            })
+        }
+
+        if (typeof categoryClicked === 'object' && categoryClicked !== null){
+            if (categoryClicked.classList[0] !== categoryId) {
+                categoryClicked.classList.remove('active');
+                this.setState({
+                    attempt: 3,
+                })
+            }
         }
 
         await storage.set('category', categoryId);
@@ -54,17 +68,15 @@ class MyProvider extends Component{
 
 
     changeAttempt = (nbr) => {
-        console.log(this.state.attempt);
         this.setState(prevState => ({
             attempt: nbr ? nbr : prevState.attempt - 1
         }));
-        console.log(this.state.attempt);
     };
 
     render(){
         const {categories, storedQuestions} = this.props;
         const {questions, attempt, questionNb} = this.state;
-
+        
         return(
             <MyContext.Provider value={{
                 categories,

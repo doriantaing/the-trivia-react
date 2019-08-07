@@ -167,10 +167,10 @@ export const MobileFooterTitle = styled.h4`
 `
 
 export const MobileButton = styled.button`
-  background: none;
+  background: #FFFFFF;
   border: 1px solid #f4f5f9;
   border-radius: 0px;
-  color: #f4f5f9;
+  color: #f9aa33;
   position: fixed;
   top: 40px; 
   left: 20px;

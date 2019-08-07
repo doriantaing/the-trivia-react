@@ -17,11 +17,7 @@ import {
 import storage from "../../helpers/Storage";
 
 
-const Question = ({
-  isMobile,
-  mobileClick,
-  context
-}) => {
+const Question = ({ context, isMobile, clickMobile}) => {
 
   const {questions, attempt, changeAttempt, storedQuestions} = context;
   const [score, changeScore] = useState(0);
@@ -84,10 +80,10 @@ const Question = ({
 
   const questionsData = questions || storedQuestions;
   context.storeLocal(score, questionNb, attempt);
+
   return (
     <Section>
       <SectionContainer ref={animWrong}>
-      
         <GlobalStyle/> 
 
         {questionsData && attempt > 0 ?
@@ -131,17 +127,16 @@ const Question = ({
           </GameOver>
         )}
       </SectionContainer>
-
-      {isMobile && (
-        <div>
-          <MobileButton onClick={mobileClick}>Back</MobileButton>
-          <MobileFooter>
-            <MobileFooterTitle>寿司ゲーム</MobileFooterTitle>
-          </MobileFooter>
-        </div>
-      )}
+        { isMobile && (
+            <React.Fragment>
+              <MobileButton onClick={clickMobile}>Go back</MobileButton>
+              <MobileFooter>
+                <MobileFooterTitle>寿司ゲーム</MobileFooterTitle>
+              </MobileFooter>
+            </React.Fragment>
+        )}
     </Section>
   )
-}
+};
 
 export default Question;

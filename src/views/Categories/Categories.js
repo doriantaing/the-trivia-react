@@ -7,8 +7,8 @@ import {
   LinkCategories,
 } from './style/CategoriesStyle';
 
-const Categories = ({title, context}) => {
-  const {categories} = context;
+const Categories = ({title, context, eventClick, isMobile}) => {
+  const { categories } = context;
   return(
     <CategoriesContent>
       <CategoriesTitle>{title}</CategoriesTitle>
@@ -19,7 +19,7 @@ const Categories = ({title, context}) => {
                 className={`${category.id}  ${storage.get('category') && storage.get('category') === category.id.toString() && 'active'}`}
                 key={category.id}
                 data-letters={category.title}
-                onClick={context.fetchData}
+                onClick={isMobile ? eventClick : context.fetchData}
             >
               {category.title}
             </LinkCategories>

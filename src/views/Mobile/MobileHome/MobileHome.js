@@ -9,7 +9,7 @@ const HomeMobile = ({eventClick}) => {
         <HomeMobileImg src={sushiGemu} alt="sushi gemu"/>
         <HomeMobileTitle>寿司ゲーム</HomeMobileTitle>
         
-        <HomeMobileButton onClick={eventClick}>Commencer</HomeMobileButton>
+        <HomeMobileButton onClick={eventClick}>Start game</HomeMobileButton>
         </HomeMobileContainer>
     )
 }
