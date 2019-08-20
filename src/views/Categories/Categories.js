@@ -6,6 +6,7 @@ import {
   CategoriesContainer,
   LinkCategories,
 } from './style/CategoriesStyle';
+import {MobileFooter, MobileFooterTitle} from "../Question/style/QuestionStyle";
 
 const Categories = ({title, context, eventClick, isMobile}) => {
   const { categories } = context;
@@ -24,6 +25,13 @@ const Categories = ({title, context, eventClick, isMobile}) => {
               {category.title}
             </LinkCategories>
           ))}
+          { isMobile && (
+              <React.Fragment>
+                <MobileFooter>
+                  <MobileFooterTitle>寿司ゲーム</MobileFooterTitle>
+                </MobileFooter>
+              </React.Fragment>
+          )}
         </CategoriesContainer>
       )}
     </CategoriesContent>

@@ -1,3 +1,4 @@
 RewriteEngine On
+RewriteCond %{HTTP_HOST} ^sushi-gemu.doriantaing.fr [NC]
 RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+RewriteRule ^(.*)$ https://sushi-gemu.doriantaing.fr

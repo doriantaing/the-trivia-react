@@ -9,7 +9,7 @@ class MyProvider extends Component{
         questionNb: storage.get('questionNb') ? storage.get('questionNb') : 0,
         lastClicked: null,
         categoryClicked: storage.get('category') ? storage.get('category') : null,
-        isClicked: false,
+        isClicked: storage.get('click') ? storage.get('click') : false,
         attempt: storage.get('attempt') ? storage.get('attempt') : 3,
     };
 
@@ -20,24 +20,29 @@ class MyProvider extends Component{
         const {categoryClicked, isClicked} = this.state;
         const categoryActive = document.querySelector('.active');
 
-
+        // If not same id change state with new element
         if (categoryClicked !== categoryId) {
             this.setState({
                 categoryClicked: element
             })
         }
 
-
+        // Fetch corresponding questions
         this.setState({
             questions: questionsData,
         });
         // this.generateRandomQuestion();
 
+        // Add current element class active
         element.classList.add('active');
 
-        if(window.innerWidth > 768 && categoryActive.classList[0] !== categoryId){
-            categoryActive.classList.remove('active');
+        
+        if(categoryActive){
+            if(window.innerWidth > 768 && categoryActive.classList[0] !== categoryId){
+                categoryActive.classList.remove('active');
+            }
         }
+
 
         if (typeof categoryClicked === 'object' && categoryClicked !== null){
             if (categoryClicked.classList[0] !== categoryId) {
