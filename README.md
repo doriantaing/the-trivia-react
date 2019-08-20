@@ -1,10 +1,10 @@
-#Trivia Game 
+# Trivia Game 
 
-To start project : 
+### To start project : 
 
-- Clone repo
-- Install dependency ( npm install )
-- npm run start
+* Clone repo
+* Install dependency ( npm install )
+* npm run start
 
 made with Create-React-app (https://github.com/facebook/create-react-app)
 
